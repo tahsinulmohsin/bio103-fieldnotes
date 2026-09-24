@@ -1,0 +1,85 @@
+{
+  "reviewedQuestions": 112,
+  "revisedDistractorSets": 15,
+  "reviewScope": "Source association, one intended exact match, category/subtype overlap, literal source wording, and no out-of-slide facts.",
+  "overrides": {
+    "chemistry-quiz-05": [
+      "SOLVENT",
+      "SOLUTE",
+      "buffer solution"
+    ],
+    "chemistry-quiz-10": [
+      "SOLVENT",
+      "SOLUTE",
+      "Isotope"
+    ],
+    "macromolecules-quiz-06": [
+      "Saturated Fatty acid",
+      "Unsaturated Fatty acid",
+      "Nucleic Acids"
+    ],
+    "macromolecules-quiz-07": [
+      "Saturated Fatty acid",
+      "Unsaturated Fatty acid",
+      "Nucleic Acids"
+    ],
+    "cells-quiz-02": [
+      "Mitochondria",
+      "Nucleus",
+      "Ribosomes"
+    ],
+    "energy-quiz-03": [
+      "Anabolism",
+      "Enzymes",
+      "Substrate-Level Phosphorylation"
+    ],
+    "energy-quiz-04": [
+      "Metabolism",
+      "Anabolism",
+      "Enzymes"
+    ],
+    "energy-quiz-05": [
+      "Anabolism",
+      "Krebs cycle",
+      "Enzymes"
+    ],
+    "homeostasis-quiz-01": [
+      "Thermo-Regulatory Center (TRC)",
+      "Pyrogen",
+      "Hypothermia"
+    ],
+    "homeostasis-quiz-04": [
+      "Pyrogen",
+      "Hypothermia",
+      "Glucose Homeostasis"
+    ],
+    "circulation-quiz-05": [
+      "Valves",
+      "septum",
+      "DIASTOLE"
+    ],
+    "circulation-quiz-06": [
+      "Valves",
+      "septum",
+      "SYSTOLE"
+    ],
+    "nutrition-quiz-06": [
+      "body mass index (BMI)",
+      "Malnutrition",
+      "Adequate"
+    ],
+    "diabetes-lipids-quiz-01": [
+      "Insulin",
+      "HDL-cholesterol",
+      "LDL-cholesterol"
+    ],
+    "diabetes-lipids-quiz-02": [
+      "Insulin",
+      "HDL-cholesterol",
+      "LDL-cholesterol"
+    ]
+  },
+  "originalFigureCovers": 13,
+  "ocrPages": 447,
+  "ocrBlocks": 9038
+}

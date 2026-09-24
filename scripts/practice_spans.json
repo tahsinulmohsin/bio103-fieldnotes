@@ -1,0 +1,863 @@
+{
+  "introduction": [
+    [
+      2,
+      "Biology",
+      "studying the science of life and living organisms."
+    ],
+    [
+      3,
+      "Organ System",
+      "Composed of several organs working together"
+    ],
+    [
+      3,
+      "Tissue",
+      "A group of cells with a common structure and function"
+    ],
+    [
+      3,
+      "Cell",
+      "The structural and functional unit of all living things"
+    ],
+    [
+      3,
+      "Molecule",
+      "Union of two or more atoms of the same or different elements"
+    ],
+    [
+      3,
+      "Population",
+      "Organisms of the same species in a particular area"
+    ],
+    [
+      3,
+      "Ecosystem",
+      "A community plus the physical environment"
+    ],
+    [
+      18,
+      "Development",
+      "A series of changes that take place as an organism grows toward final form, is called development."
+    ],
+    [
+      25,
+      "Adaptation",
+      "The process by which a certain type of organisms becomes better suited to survive in its environment is called adaptation."
+    ],
+    [
+      27,
+      "Anabolism",
+      "Building up"
+    ],
+    [
+      27,
+      "Catabolism",
+      "Breaking down"
+    ],
+    [
+      3,
+      "Organ",
+      "Composed of tissues functioning together for a specific task"
+    ],
+    [
+      3,
+      "Organism",
+      "An individual; complex individuals contain organ systems"
+    ],
+    [
+      3,
+      "Community",
+      "Interacting populations in a particular area"
+    ],
+    [
+      3,
+      "Atom",
+      "Smallest unit of an element composed of electrons, protons, and neutrons"
+    ],
+    [
+      3,
+      "Biosphere",
+      "Regions of the Earth’s crust, waters, and atmosphere inhabited by living things"
+    ]
+  ],
+  "chemistry": [
+    [
+      8,
+      "Isotope",
+      "Same number of protons but different number of neutrons"
+    ],
+    [
+      17,
+      "Ionic Bond",
+      "Transfer of Electron from the outermost shell."
+    ],
+    [
+      21,
+      "Covalent Bond",
+      "Chemical bonds are formed by the sharing of a pair of electrons between atoms."
+    ],
+    [
+      23,
+      "Electronegativity",
+      "Electronegativity is a measure of the ability of an atom in a molecule to draw bonding electrons to itself (the ability of an atom to attract the bonding electrons)."
+    ],
+    [
+      39,
+      "Surface Tension",
+      "The tightness across the surface of water that is caused by the polar molecules pulling on one another."
+    ],
+    [
+      40,
+      "SOLVENT",
+      "the thing doing the dissolving"
+    ],
+    [
+      40,
+      "SOLUTE",
+      "the thing that dissolves away"
+    ],
+    [
+      42,
+      "Cohesion",
+      "is the attractive force between water molecules."
+    ],
+    [
+      43,
+      "Adhesion",
+      "occurs when molecules of water are attracted to other substances."
+    ],
+    [
+      50,
+      "Diffusion",
+      "The process by which molecules spread from areas of high concentration, to areas of low concentration."
+    ],
+    [
+      55,
+      "Osmosis",
+      "Osmosis is a process by which the molecules of a solvent pass from a solution of low concentration to a solution of high concentration through a semipermeable membrane"
+    ],
+    [
+      64,
+      "buffer solution",
+      "A buffer solution is one which maintains its pH fairly constant even upon the addition of small amounts of acid or base."
+    ],
+    [
+      5,
+      "Proton",
+      "+ve charge, All atoms are distinguished by the number of protons it has"
+    ],
+    [
+      5,
+      "Neutrons",
+      "NO charge, Have same mass of protons"
+    ],
+    [
+      6,
+      "atomic number",
+      "number of protons in the nucleus of an atom of an element"
+    ],
+    [
+      16,
+      "Chemical bond",
+      "A chemical bond is defined as a force that acts between two or more atoms to hold them together as a stable molecule"
+    ],
+    [
+      16,
+      "van der Waals interactions",
+      "intermolecular interactions that do not involve covalent bonds or ions."
+    ]
+  ],
+  "macromolecules": [
+    [
+      5,
+      "Monomers",
+      "Monomers are small molecules or building blocks that may be joined together in a repeating fashion to form more complex molecules called polymers."
+    ],
+    [
+      13,
+      "Carbohydrate",
+      "The hydrate of carbon is known as carbohydrates."
+    ],
+    [
+      24,
+      "Cellulose",
+      "Cellulose is an important structural component of the primary cell wall of green plants."
+    ],
+    [
+      33,
+      "Essential",
+      "must be supplied in the diet."
+    ],
+    [
+      35,
+      "Primary structure",
+      "The linear arrangement of amino acids in a protein"
+    ],
+    [
+      35,
+      "Secondary structure",
+      "Areas of folding or coiling within a protein."
+    ],
+    [
+      35,
+      "Tertiary structure",
+      "Final three-dimensional structure of a protein, which results from a large number of non-covalent interactions between amino acids."
+    ],
+    [
+      35,
+      "Quaternary structure",
+      "Non-covalent interactions that bind multiple polypeptides into a single, larger protein."
+    ],
+    [
+      46,
+      "Saturated Fatty acid",
+      "In a fatty acid chain, if there are only single bonds between neighbouring carbons in the hydrocarbon chain."
+    ],
+    [
+      46,
+      "Unsaturated Fatty acid",
+      "When the hydrocarbon chain contains a double bond, between neighbouring carbons."
+    ],
+    [
+      59,
+      "Nucleic Acids",
+      "The chemical link between generations"
+    ],
+    [
+      5,
+      "Polymer",
+      "A polymer may be a natural or synthetic macromolecule comprised of repeating units of a smaller molecule"
+    ],
+    [
+      9,
+      "Metabolism",
+      "Metabolism refers to activities by which cells acquire and use energy as they make and break apart organic compounds."
+    ],
+    [
+      47,
+      "essential fatty acids (EFA)",
+      "polyunsaturated fatty acids (PUFA) that must be provided by foods because these cannot be synthesized in the body yet are necessary for health."
+    ]
+  ],
+  "molecular-biology": [
+    [
+      9,
+      "Messenger RNA/ mRNA",
+      "Transcripts of structural genes."
+    ],
+    [
+      11,
+      "Ribosomal RNA/ rRNA",
+      "rRNA provides a mechanism for decoding mRNA into amino acids."
+    ],
+    [
+      12,
+      "Transfer RNA/ tRNA",
+      "tRNA carry correct amino acids to their position along the mRNA template to be added to the growing polypeptide chain."
+    ],
+    [
+      14,
+      "Codons",
+      "Codons specify different amino acids"
+    ],
+    [
+      17,
+      "DNA Replication",
+      "The DNA duplication."
+    ],
+    [
+      25,
+      "The Human Genome",
+      "All the DNA in the cell makes up the human genome."
+    ],
+    [
+      11,
+      "Ribosome",
+      "factory for protein synthesis"
+    ],
+    [
+      23,
+      "Transcription",
+      "Transcription is the synthesis of RNA from a DNA template."
+    ],
+    [
+      23,
+      "Translation",
+      "Translation is the synthesis of a protein from an mRNA template."
+    ],
+    [
+      24,
+      "Genes",
+      "The gene of the coding region encodes instructions that allow a cell to produce a specific protein or enzyme."
+    ]
+  ],
+  "cells": [
+    [
+      17,
+      "Passive Transport",
+      "ATP energy is not needed to move the molecules through."
+    ],
+    [
+      22,
+      "Active Transport",
+      "Molecules move from areas of low concentration to areas of high concentration with the aid of ATP energy."
+    ],
+    [
+      24,
+      "Exocytosis",
+      "Movement of large molecules bound in vesicles out of the cell with the aid of ATP energy."
+    ],
+    [
+      25,
+      "Endocytosis",
+      "Movement of large molecules into the cell by engulfing them in vesicles, using ATP energy."
+    ],
+    [
+      31,
+      "Mitochondria",
+      "make ATP energy from cellular respiration"
+    ],
+    [
+      36,
+      "Nucleus",
+      "control center of cell"
+    ],
+    [
+      37,
+      "Ribosomes",
+      "protein factories"
+    ],
+    [
+      39,
+      "Golgi Apparatus",
+      "finishes, sorts, labels & ships proteins"
+    ],
+    [
+      26,
+      "Pinocytosis",
+      "“Cellular Drinking” – engulfing liquids and small molecules dissolved in liquids; unspecific what enters."
+    ],
+    [
+      30,
+      "Lysosomes",
+      "clean up & recycle"
+    ],
+    [
+      36,
+      "nucleolus",
+      "ribosome factory"
+    ],
+    [
+      38,
+      "rough ER",
+      "ribosomes attached"
+    ],
+    [
+      38,
+      "smooth ER",
+      "makes membranes"
+    ]
+  ],
+  "energy": [
+    [
+      2,
+      "Metabolism",
+      "The sum of the chemical processes that occur in living organisms, resulting in growth, production of energy, elimination of waste material, etc."
+    ],
+    [
+      2,
+      "Anabolism",
+      "build up of complex molecules"
+    ],
+    [
+      2,
+      "Catabolism",
+      "break down of complex molecules"
+    ],
+    [
+      5,
+      "Substrate-Level Phosphorylation",
+      "Direct transfer of a phosphate group from a high-energy substrate to ADP, forming ATP."
+    ],
+    [
+      6,
+      "Fermentation",
+      "Anaerobic process that allows ATP production in the absence of oxygen."
+    ],
+    [
+      9,
+      "Glycolysis",
+      "generate only 2 ATP for every 1 glucose"
+    ],
+    [
+      18,
+      "Krebs cycle",
+      "Citric Acid Cycle"
+    ],
+    [
+      26,
+      "Enzymes",
+      "A protein catalyst"
+    ],
+    [
+      27,
+      "Substrate",
+      "molecule that enzymes work on"
+    ],
+    [
+      27,
+      "Products",
+      "what the enzyme helps produce from the reaction"
+    ],
+    [
+      27,
+      "Active site",
+      "part of enzyme that substrate molecule fits into"
+    ]
+  ],
+  "cell-division": [
+    [
+      13,
+      "G1",
+      "primary growth phase"
+    ],
+    [
+      13,
+      "S",
+      "synthesis; DNA replicated"
+    ],
+    [
+      13,
+      "G2",
+      "secondary growth phase"
+    ],
+    [
+      16,
+      "Metaphase",
+      "Chromosomes are now lined up at the equator"
+    ],
+    [
+      17,
+      "Anaphase",
+      "Sister chromatids are pulled apart to opposite poles of the cell by kinetochore fibers"
+    ],
+    [
+      19,
+      "Cytokinesis",
+      "Means division of the cytoplasm"
+    ],
+    [
+      35,
+      "Spermatogenesis",
+      "Occurs in the testes"
+    ],
+    [
+      37,
+      "Oogenesis",
+      "Occurs in the ovaries"
+    ],
+    [
+      8,
+      "Karyotype",
+      "A picture of the chromosomes from a human cell arranged in pairs by size"
+    ],
+    [
+      8,
+      "autosomes",
+      "First 22 pairs are called autosomes"
+    ],
+    [
+      8,
+      "sex chromosomes",
+      "Last two are the sex chromosomes"
+    ],
+    [
+      18,
+      "Telophase",
+      "Nuclear envelope forms around each set of sister chromatids"
+    ]
+  ],
+  "homeostasis": [
+    [
+      2,
+      "Homeostasis",
+      "The maintenance of a constant environment in the body is called Homeostasis"
+    ],
+    [
+      3,
+      "Osmoregulation",
+      "Water balance"
+    ],
+    [
+      5,
+      "Glucose Homeostasis",
+      "The body’s ability to keep blood glucose levels within a narrow range (about 70–110 mg/dL fasting), despite changes from eating, fasting, or exercise"
+    ],
+    [
+      7,
+      "Thermo-Regulatory Center (TRC)",
+      "has the responsibility of maintaining the body’s core temperature (it is called body’s thermostat)."
+    ],
+    [
+      10,
+      "Pyrogen",
+      "a substance, that causes a rise in temperature in a human or an animal"
+    ],
+    [
+      11,
+      "Hypothermia",
+      "colder than normal body temperature"
+    ],
+    [
+      10,
+      "Prostaglandin (PG)",
+      "a potent hyperthermic agent"
+    ],
+    [
+      10,
+      "Fever",
+      "occurs when the core temperature of the body is raised above normal steady state levels."
+    ],
+    [
+      13,
+      "stomata",
+      "Allow gas exchange for photosynthesis"
+    ]
+  ],
+  "circulation": [
+    [
+      4,
+      "Valves",
+      "Valves prevent the blood from flowing backwards."
+    ],
+    [
+      4,
+      "septum",
+      "The septum separates the two sides of the heart left and right."
+    ],
+    [
+      5,
+      "DIASTOLE",
+      "when the heart is at rest/dialet to collect blood"
+    ],
+    [
+      5,
+      "SYSTOLE",
+      "when the heart contracts to pump deoxygenated blood toward the lungs and oxygenated blood to the body."
+    ],
+    [
+      8,
+      "Oxygenated blood",
+      "Blood that contains a high percentage of oxygen"
+    ],
+    [
+      8,
+      "Deoxygenated blood",
+      "Blood that has a low percentage of oxygen"
+    ],
+    [
+      11,
+      "Blood",
+      "Blood is a specialized liquid connective tissue that circulates through the arteries and veins, carrying essential substances throughout the body."
+    ],
+    [
+      16,
+      "Serum",
+      "Serum is the liquid portion of blood that remains after clotting factors, primarily fibrinogen, are removed from plasma during blood clotting (essentially plasma without fibrinogen and other clotting factors)."
+    ],
+    [
+      6,
+      "arterioles",
+      "Small arteries are called arterioles"
+    ],
+    [
+      6,
+      "venules",
+      "Small veins are called venules."
+    ],
+    [
+      12,
+      "Plasma",
+      "Fluid part of blood [soluble portion]"
+    ],
+    [
+      12,
+      "Platelets",
+      "Clump together to form clots"
+    ],
+    [
+      12,
+      "White blood cells",
+      "produce antibodies and destroy harmful microorganisms"
+    ]
+  ],
+  "digestion": [
+    [
+      3,
+      "Ingest",
+      "taking in food"
+    ],
+    [
+      3,
+      "mechanical digestion",
+      "breaking up food into smaller pieces"
+    ],
+    [
+      3,
+      "chemical digestion",
+      "breaking down food into molecules small enough to be absorbed into cells"
+    ],
+    [
+      3,
+      "Eliminate",
+      "undigested material passes out of body"
+    ],
+    [
+      8,
+      "Esophagus",
+      "The esophagus shuttles food from the pharynx (mouth) to the stomach."
+    ],
+    [
+      10,
+      "Parietal cells",
+      "secrete hydrochloric acid (HCl)"
+    ],
+    [
+      10,
+      "Chief cells",
+      "secrete pepsinogen, precursor to the enzyme pepsin."
+    ],
+    [
+      20,
+      "Liver",
+      "Produces bile, stores glucose as glycogen & releases glucose into blood stream"
+    ],
+    [
+      20,
+      "Gallbladder",
+      "Stores bile, and squirts bile into small intestine when fat arrives"
+    ],
+    [
+      20,
+      "Pancreas",
+      "Makes enzymes, empties them into small intestine"
+    ],
+    [
+      2,
+      "Herbivores",
+      "eat mainly plants"
+    ],
+    [
+      2,
+      "Carnivores",
+      "eat other animals"
+    ],
+    [
+      2,
+      "Omnivores",
+      "eat animals & plants"
+    ],
+    [
+      4,
+      "alimentary canal or gastrointestinal tract (GI tract)",
+      "A tube, or gut, through which food travels in one direction."
+    ],
+    [
+      8,
+      "peristalsis",
+      "the rhythmic and stepwise contraction to move along the esophageal passage."
+    ]
+  ],
+  "respiration-excretion": [
+    [
+      5,
+      "Pharynx",
+      "a short, funnel-shaped tube about 13 cm (5 in) long that transports air to the larynx."
+    ],
+    [
+      7,
+      "alveoli",
+      "tiny air sacs surrounded by capillaries."
+    ],
+    [
+      12,
+      "Kidneys",
+      "formation of urine"
+    ],
+    [
+      12,
+      "Ureters",
+      "transport of urine from kidneys to urinary bladder"
+    ],
+    [
+      12,
+      "Urinary bladder",
+      "reservoir of urine"
+    ],
+    [
+      12,
+      "urethra",
+      "passage of urine from urinary bladder to outside"
+    ],
+    [
+      13,
+      "Nephrons",
+      "the structural & functional units of kidneys."
+    ],
+    [
+      14,
+      "Osmoregulation",
+      "Osmoregulation is the process by which cells and simple organisms maintain fluid and electrolyte balance with their surroundings."
+    ],
+    [
+      4,
+      "larynx",
+      "voice box"
+    ],
+    [
+      4,
+      "trachea",
+      "windpipe"
+    ],
+    [
+      4,
+      "lungs",
+      "a pair of saclike, spongy organs."
+    ],
+    [
+      6,
+      "bronchioles",
+      "Within the lungs, the bronchi branch into smaller tubes called bronchioles."
+    ]
+  ],
+  "nutrition": [
+    [
+      2,
+      "Nutrient",
+      "are the raw materials, which provide the essential matter and energy for life."
+    ],
+    [
+      4,
+      "Balanced diet",
+      "a diet containing all the proximate principles of food in adequate and proportionate amounts; including essential amino acids and fatty acids for normal growth, activity, reproduction."
+    ],
+    [
+      4,
+      "Adequate",
+      "Means the amount that supply the exact calories."
+    ],
+    [
+      4,
+      "Proportionate amount",
+      "Means presence of appropriate amount of food stuffs."
+    ],
+    [
+      10,
+      "vitamin",
+      "an organic compound required as a vital nutrient in tiny amounts by an organism."
+    ],
+    [
+      15,
+      "Water",
+      "Water provides the medium in which all the body’s reactions take place."
+    ],
+    [
+      16,
+      "body mass index (BMI)",
+      "a value derived from the mass (weight) and height of an individual."
+    ],
+    [
+      19,
+      "Malnutrition",
+      "Malnutrition refers to insufficient, excessive, or imbalanced consumption of essential nutrients or impaired nutrient utilization by an organism/individual."
+    ],
+    [
+      10,
+      "Fat soluble Vitamins",
+      "They can remain stored in body fats."
+    ],
+    [
+      10,
+      "Water soluble Vitamins",
+      "Need to take frequently/everyday."
+    ],
+    [
+      11,
+      "Water-soluble vitamins",
+      "dissolve easily in water and, in general, are readily excreted from the body"
+    ],
+    [
+      11,
+      "Fat-soluble vitamins",
+      "absorbed through the intestinal tract with the help of lipids (fats)."
+    ]
+  ],
+  "diabetes-lipids": [
+    [
+      2,
+      "Diabetes mellitus",
+      "a metabolic disorder characterized by abnormally high levels of sugar (glucose) in the blood."
+    ],
+    [
+      2,
+      "Hyperglycemia",
+      "Condition of high levels of glucose in the blood"
+    ],
+    [
+      3,
+      "Insulin",
+      "a hormone secreted from the Islet cells of the Pancreas."
+    ],
+    [
+      6,
+      "Gestational diabetes",
+      "a form of diabetes that occurs during pregnancy."
+    ],
+    [
+      16,
+      "HDL-cholesterol",
+      "often called good cholesterol"
+    ],
+    [
+      16,
+      "LDL-cholesterol",
+      "often called bad cholesterol"
+    ],
+    [
+      17,
+      "Triglycerides",
+      "This is a type of fat from the food we eat."
+    ],
+    [
+      21,
+      "Cholesterol ratio (CR)",
+      "is calculated by dividing your total cholesterol by the amount of high-density lipoproteins (HDL) in your blood."
+    ],
+    [
+      4,
+      "Glucose",
+      "type of sugar that is your body’s main source of energy."
+    ],
+    [
+      10,
+      "Macrosomia",
+      "refers to a baby that is considerably larger than normal."
+    ],
+    [
+      10,
+      "Hypoglycemia",
+      "refers to low blood sugar in the baby immediately after delivery."
+    ],
+    [
+      10,
+      "Respiratory distress",
+      "difficulty in breathing."
+    ],
+    [
+      15,
+      "lipid profile",
+      "panel of blood tests used to find abnormalities in blood lipid ( such as cholesterol and triglycerides) concentrations."
+    ]
+  ]
+}

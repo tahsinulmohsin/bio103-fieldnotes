@@ -1,0 +1,27 @@
+{
+  "name": "bio103-fieldnotes",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0 --port 3103",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0 --port 3103",
+    "typecheck": "tsc --noEmit",
+    "verify:content": "python3 scripts/validate_course.py"
+  },
+  "dependencies": {
+    "next": "16.3.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "motion": "13.4.0",
+    "lucide-react": "^0.577.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "4.3.3",
+    "@tailwindcss/postcss": "4.3.3"
+  }
+}

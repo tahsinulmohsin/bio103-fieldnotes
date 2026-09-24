@@ -1,0 +1,6 @@
+.git
+deployment/
+compose.yaml
+Dockerfile
+deploy.sh
+scratch/

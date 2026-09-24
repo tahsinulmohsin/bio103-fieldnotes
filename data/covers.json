@@ -1,0 +1,184 @@
+{
+  "introduction": {
+    "cover": "/covers/introduction.jpg",
+    "coverSource": {
+      "page": 8,
+      "embeddedImageIndex": 4,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 1-2 MRIs.pdf",
+      "sourceSha256": "cd1f6af4523040d4d83d52337abfbcc93fcbf6ee7db7acfe48a5c5a6237419d5",
+      "imageSha256": "2645f95b9d4e932d1ef14a11633d72c4e9be896fa1ecba8cd9959c1fae4c3b51",
+      "width": 545,
+      "height": 400
+    }
+  },
+  "chemistry": {
+    "cover": "/covers/chemistry.jpg",
+    "coverSource": {
+      "page": 26,
+      "embeddedImageIndex": 0,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 3-5 MRIs.pdf",
+      "sourceSha256": "cadb7e0572a1c307423a07ecad664a3e6445355ad62548aca51b99728a43f8a7",
+      "imageSha256": "923096c2329269f124a6f5ebaf2441894110537f132923869c70c63b63e11e82",
+      "width": 691,
+      "height": 974
+    }
+  },
+  "macromolecules": {
+    "cover": "/covers/macromolecules.jpg",
+    "coverSource": {
+      "page": 31,
+      "embeddedImageIndex": 0,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 6-9 MRIs.pdf",
+      "sourceSha256": "e39d0d2538bfe720789f4db164dd2c3a81e6f7d684170bae0cc93af2c2e4ba5f",
+      "imageSha256": "4ab98c2456e262663274a3e7105bfe0d63be9b3e85b522272b2cb98485cf66ff",
+      "width": 749,
+      "height": 416
+    }
+  },
+  "molecular-biology": {
+    "cover": "/covers/molecular-biology.png",
+    "coverSource": {
+      "page": 6,
+      "extractionMethod": "PDF diagram region rendered with pdftoppm",
+      "regionPixels": {
+        "x": 510,
+        "y": 190,
+        "width": 780,
+        "height": 980
+      },
+      "renderScaleTo": 1800,
+      "file": "Lecture 10 MRIs.pdf",
+      "sourceSha256": "b3f6db642301bb797fd6bc9ca903081bb40fdd2dbf735ca592d84cde54f06d87",
+      "imageSha256": "82edd814eb3d92abd4f6822c87ef780e82451b4e5dc375bc6c8cdd818eb58b79",
+      "width": 780,
+      "height": 980
+    }
+  },
+  "cells": {
+    "cover": "/covers/cells.png",
+    "coverSource": {
+      "page": 32,
+      "embeddedImageIndex": 0,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "softMaskImageIndex": 1,
+      "file": "Lecture 11-13 MRIs.pdf",
+      "sourceSha256": "0efbc03f06bd6149a0352f84539604edfc57d76f85c6ed109c78e5c73edad0d3",
+      "imageSha256": "99320838f1ecfafc21be613d5381437d20ac17320dabd55bc98e0bca16e29a4d",
+      "width": 1717,
+      "height": 1012
+    }
+  },
+  "energy": {
+    "cover": "/covers/energy.jpg",
+    "coverSource": {
+      "page": 23,
+      "embeddedImageIndex": 2,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 13-15 MRIs.pdf",
+      "sourceSha256": "5cce1060171c435ebec684240fd16d930c97c1e858895ce4438829e233f43368",
+      "imageSha256": "648299172c7f6a4105c3daf4259d246aa64e3e0719a0d785347b2dd9464b4ec7",
+      "width": 300,
+      "height": 307
+    }
+  },
+  "cell-division": {
+    "cover": "/covers/cell-division.png",
+    "coverSource": {
+      "page": 22,
+      "extractionMethod": "PDF diagram region rendered with pdftoppm",
+      "regionPixels": {
+        "x": 70,
+        "y": 260,
+        "width": 1650,
+        "height": 1015
+      },
+      "renderScaleTo": 1800,
+      "file": "Lecture 16 MRIs.pdf",
+      "sourceSha256": "2ea3a0889b79cde396a96171df08d7b5cfe31acb2a53e48f30c66c15b205d75b",
+      "imageSha256": "0d5d05126d5ab6680f8f5f2f8231f78631a8e461abc45d9a21041cca50523765",
+      "width": 1650,
+      "height": 1015
+    }
+  },
+  "homeostasis": {
+    "cover": "/covers/homeostasis.png",
+    "coverSource": {
+      "page": 4,
+      "embeddedImageIndex": 0,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 17 Homeostasis.pdf",
+      "sourceSha256": "5c0e76abd53207cc09fa66be3d86c33010fef8f48f7a20befcf3eadae87f7630",
+      "imageSha256": "677a9f96ec8a5e72d2d39919ef4c443830571fdfe69db7c22917df460653911a",
+      "width": 380,
+      "height": 448
+    }
+  },
+  "circulation": {
+    "cover": "/covers/circulation.png",
+    "coverSource": {
+      "page": 4,
+      "embeddedImageIndex": 0,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 18 Blood.pdf",
+      "sourceSha256": "cdbdc057fd457c9185fd154433cc470f760f78a927093c57eb9a6059e1d96201",
+      "imageSha256": "65d760fb51eb3669d7f102f5bd4585f58671bc7432a5137de278aa9ff542e7af",
+      "width": 524,
+      "height": 526
+    }
+  },
+  "digestion": {
+    "cover": "/covers/digestion.jpg",
+    "coverSource": {
+      "page": 5,
+      "embeddedImageIndex": 2,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 19 DigS MRIs.pdf",
+      "sourceSha256": "1f2321822e34bbb7aadf4b9a4f0192d80f3561cf6df792d1811d6ed868260a5c",
+      "imageSha256": "4b806083030ee6b42b3fa7d211954fca990e77b3fbb65cdb865ca8863a47ffb4",
+      "width": 393,
+      "height": 452
+    }
+  },
+  "respiration-excretion": {
+    "cover": "/covers/respiration-excretion.jpg",
+    "coverSource": {
+      "page": 8,
+      "embeddedImageIndex": 0,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 20_Respiratory _Excre.pdf",
+      "sourceSha256": "462047793f69953f91b9f5e13659ce973e0f68a2e643ce86b5eded1dfa1b943e",
+      "imageSha256": "5995a2b39798f9251132b9fdf0bbb042c3abd3ae48d62fa8733f15432b18f0c9",
+      "width": 723,
+      "height": 582
+    }
+  },
+  "nutrition": {
+    "cover": "/covers/nutrition.jpg",
+    "coverSource": {
+      "page": 3,
+      "embeddedImageIndex": 0,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 21 Food _ Nutrition.pdf",
+      "sourceSha256": "f924ff60e69c2e9282cca19e25e531ce0d2daefa94cff037d945ed3329be16a2",
+      "imageSha256": "184041add939ffd43cac0b4171cac40e36f8a4d755424217110408265eabdd4a",
+      "width": 346,
+      "height": 346
+    }
+  },
+  "diabetes-lipids": {
+    "cover": "/covers/diabetes-lipids.png",
+    "coverSource": {
+      "page": 8,
+      "embeddedImageIndex": 1,
+      "extractionMethod": "Original embedded image extracted by pdfimages",
+      "file": "Lecture 22_Diabetes_Lipid Profile.pptx",
+      "sourceSha256": "3120d0f76257525918621b9ed0df1635d5788b25b341b9f028ee724af07ca34d",
+      "imageSha256": "a3adf704a6480090ada9ec51d5c3b8653ac7c0ae977c63c1f7de1d97b4fef5cf",
+      "width": 200,
+      "height": 216
+    }
+  }
+}
