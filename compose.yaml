@@ -2,7 +2,8 @@ name: bio103-fieldnotes
 
 services:
   bio103:
-    image: bio103-fieldnotes:latest
+    # BIO103_IMAGE_TAG selects a retained image for rollback (see deployment/README.md).
+    image: bio103-fieldnotes:${BIO103_IMAGE_TAG:-latest}
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,6 +16,14 @@ services:
       - NEXT_TELEMETRY_DISABLED=1
       - HOSTNAME=0.0.0.0
       - PORT=3000
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/.next/cache:uid=1001,gid=1001,mode=0755
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
     healthcheck:
       test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/api/health || exit 1"]
       interval: 15s

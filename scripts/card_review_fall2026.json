@@ -1,0 +1,35 @@
+{
+  "about": "Manual review of the Fall 2026 flashcards found by build_course.py. 'reject' removes candidates by term (they are headings, lists, fragments or ambiguous). 'add' supplies extra cards as [page, term, definition]; both strings must appear verbatim (up to whitespace) in that slide's text.",
+  "reject": {
+    "classification": ["cougar"],
+    "chemistry": ["Water", "Acids"],
+    "macromolecules": ["Non-essential", "Beeswax"],
+    "cells": ["peroxisomes", "Stroma"],
+    "energy": ["Enzymes are specific"],
+    "cell-cycle": ["Animal cells"],
+    "diabetes-lipids": ["juvenile onset diabetes", "lipid panel", "good cholesterol"]
+  },
+  "add": {
+    "classification": [
+      [8, "Genus", "Group of species that are similar."],
+      [8, "Species", "Organisms that are structurally very similar."],
+      [12, "Homologous Structure", "show the same basic pattern, the same general relationship to other parts, and the same pattern of development."],
+      [12, "Similar Biochemistry", "closely related organisms form similar chemical compounds in their body."],
+      [12, "Genetic Similarity", "the greater the similarity of DNA among organisms, the more closely they may be related."]
+    ],
+    "central-dogma": [
+      [2, "Gene expression", "the process by which DNA directs protein synthesis"],
+      [2, "central dogma of biology", "The central dogma of biology describes the flow of information from gene sequence to protein product"],
+      [9, "RNA polymerase", "An enzyme called RNA polymerase copies the gene's nucleotides one by one into an mRNA molecule."]
+    ],
+    "respiration-excretion": [
+      [5, "Inhalation", "Inhalation brings air from outside the body into the lungs."],
+      [10, "pharynx", "Air leaves the nasal passages and flows to the pharynx, a short, funnel-shaped tube about 13 cm (5 in) long that transports air to the larynx."],
+      [12, "alveoli", "They terminate in alveoli, tiny air sacs surrounded by capillaries."],
+      [19, "Ureters", "transport of urine from kidneys to urinary bladder"],
+      [19, "Urinary bladder", "reservoir of urine"],
+      [19, "urethra", "passage of urine from urinary bladder to outside"],
+      [20, "Nephrones", "Each kidney contains about one million Nephrones which are the structural & functional unit of kidneys."]
+    ]
+  }
+}

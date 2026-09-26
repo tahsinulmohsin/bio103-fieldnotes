@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Extract original embedded figures as dashboard covers, without redrawing content."""
+"""Extract original embedded Fall 2025 figures as dashboard covers, without redrawing content."""
 from pathlib import Path
 import hashlib,json,shutil,subprocess,tempfile
 from PIL import Image
 APP=Path(__file__).resolve().parents[1]
-course_path=APP/'data/course.json'
+course_path=APP/'data/extracted/fall2025.json'  # Fall 2025 covers; Fall 2026 uses slide images
 course=json.loads(course_path.read_text())
 # Values identify the PDF page and image number reported by `pdfimages -list`.
 selection={

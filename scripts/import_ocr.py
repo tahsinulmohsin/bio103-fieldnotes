@@ -9,7 +9,7 @@ APP = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
 parser.add_argument('jsonl_files', nargs='+', type=Path)
 args = parser.parse_args()
-course_path = APP / 'data/course.json'
+course_path = APP / 'data/extracted/fall2025.json'
 course = json.loads(course_path.read_text())
 slides = {s['id']: s for m in course['modules'] + course['references'] for s in m['slides']}
 records = {}

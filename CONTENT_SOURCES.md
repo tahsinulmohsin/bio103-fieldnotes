@@ -1,51 +1,85 @@
 # NSU BIO103 content provenance
 
-The app uses only the files supplied in `BIO103 - Fall 2025 - MRIS`. No biological explanations, definitions, answer facts, or diagrams were fetched from the internet or added from model knowledge. Slide wording, including the source's spelling and inconsistencies, is retained. Generic navigation, question instructions, and organizational labels are application copy.
+All study content comes from two local lecture collections. No biology was fetched from the internet. Slide wording, including the source's spelling and inconsistencies, is kept. Navigation text, question instructions and topic names are app copy.
 
-## Complete coverage
+The one exception is labelled: **explanations**. Every Fall 2026 slide (411) and 146 Fall 2025 slides have an explanation written to make the slide easier to understand (`scripts/explanations/<semester>/`, plus Fall 2025's earlier notes in `scripts/polished/`). They re-state the slide in plain language and may add a little background; where a slide is out of date or imprecise, the explanation notes it gently; the app reminds students that the lecture is the authority if anything differs. The app labels each one ("Explanation written for this slide…"), the slide's own words are one tap away, and explanations are never used for flashcards, multiple-choice answers or short-answer model answers.
 
-| Local source | Teaching slides | Exact-source cards | Basic questions |
-|---|---:|---:|---:|
-| Lecture 1-2 MRIs.pdf | 33 | 16 | 206 |
-| Lecture 3-5 MRIs.pdf | 65 | 17 | 345 |
-| Lecture 6-9 MRIs.pdf | 74 | 14 | 205 |
-| Lecture 10 MRIs.pdf | 27 | 10 | 71 |
-| Lecture 11-13 MRIs.pdf | 44 | 13 | 167 |
-| Lecture 13-15 MRIs.pdf | 37 | 11 | 156 |
-| Lecture 16 MRIs.pdf | 41 | 12 | 137 |
-| Lecture 17 Homeostasis.pdf | 13 | 9 | 97 |
-| Lecture 18 Blood.pdf | 19 | 13 | 145 |
-| Lecture 19 DigS MRIs.pdf | 25 | 15 | 197 |
-| Lecture 20_Respiratory _Excre.pdf | 17 | 12 | 105 |
-| Lecture 21 Food _ Nutrition.pdf | 22 | 12 | 163 |
-| Lecture 22_Diabetes_Lipid Profile.pptx | 22 | 13 | 122 |
-| **Total** | **439** | **167** | **2116** |
+## Fall 2026: Prof. Dr. Md. Mahbubul Morshed (MBMD)
 
-The separate eight-page `BIO 103.38_outline_Fall 2025.pdf` is available as reference material and generates no practice. All 447 pages have a rendered visual, including original diagrams, tables, labels, and image-embedded text. The PowerPoint includes four hidden slides: all 22 were exported and retained in their original order.
+Source folder: `NSU Fall 2026/BIO103 MBMD` (13 `.pptx` decks and one legacy `.ppt`).
 
-## How the app data was produced
+| Topic | Source file | Slides |
+|---|---|---:|
+| Introduction to Biology & Life | Lec-1,2_Introduction to Biology+Life (3).pptx | 34 |
+| Classification of Living Things | L - 3 Classification of Living Things.pptx | 21 |
+| Chemistry of Life | Lec-4,5_Chemistry of life.pptx | 36 |
+| Biological Macromolecules | Lec-6,7_Biological macromolecules.pptx | 34 |
+| Cell Structure and Function | Lec-8,9_Cells.ppt | 30 |
+| Central Dogma of Life | Lec-10_CDL.pptx | 12 |
+| Energy of Life | Lec-11,12_Energy of Life.pptx | 31 |
+| Cell Cycle & Cellular Division | Lec-13,14_Cell Cycle.pptx | 45 |
+| Homeostasis | Lec-15_Homeostasis.pptx | 28 |
+| Digestive System | Lec-16_digestion.pptx | 24 |
+| Circulatory System | Lec-17_Circulatory System.pptx | 46 |
+| Human Respiratory & Excretory System | Lec-18_Respiratory & Excretory System.pptx | 23 |
+| Diabetes & Lipid Profile | Lec-19_Diabetes_LP.pptx | 21 |
+| Food and Nutrition | Lec-20_Food & Nutrition.pptx | 26 |
+| **Total** | | **411** |
 
-- `data/course.json` records every teaching slide and reference page, original source filenames and SHA-256 hashes, exact extracted text, slide-image hashes, and practice provenance.
-- `public/slides/` contains the complete source visuals as 1,800-pixel WebP images. PDF pages are rendered directly; PowerPoint slides are first rendered by LibreOffice with hidden-slide export enabled.
-- `public/covers/` contains 13 separately extracted original figures for dashboard artwork. Eleven are embedded source images (including the cell image's original transparency mask); two are rendered diagram regions that preserve overlaid source labels. Their extraction methods, page positions, and hashes are recorded in `data/covers.json`.
-- `public/sources/` contains unchanged copies of the 14 supplied files, plus the PowerPoint's rendered PDF for preview.
-- `scripts/practice_spans.json` selects terms and definition spans from the supplied slides. Each generated card records character offsets into its slide's `rawText`. The card's term and definition are literal substrings, preserving wording and line breaks.
-- Questions are deterministically generated matching or cloze exercises. When a definition contains its own answer term, that term is replaced with a blank in the prompt; the answer explanation retains the complete exact quotation. Correct answers, alternatives, and explanations all come from the same lecture's extracted source text. No false biological statements are invented as distractors.
-- All 112 option sets were reviewed against their source associations. Fifteen sets use reviewed distractors from `scripts/practice_distractors.json` to avoid presenting an overlapping category, subtype, or closely related process as a competing answer.
-- Text from figures can also be read directly in the original slide visuals. Local Apple Vision OCR extracted 9,038 text blocks from all 447 page images with language correction disabled. `data/source-ocr.json` preserves recognized text, confidence, geometry and source-image hashes; each slide exposes optional `ocrText`. OCR may misread small labels and is explicitly separate from exact source text. It is never used to create practice.
+- Slide text is read from each deck's OOXML, shape by shape, keeping bullet levels and tables. The `.ppt` deck is first converted to `.pptx` by LibreOffice.
+- Slide images are rendered from LibreOffice's PDF export (hidden slides included; none of these decks has any).
+- Originals and their PDF renderings are published as `public/sources/fall2026/<topic>.pptx|.ppt|.pdf`; the app shows the original file names. SHA-256 hashes of both are recorded and checked.
+- Some decks use Symbol, Wingdings and Webdings characters. These are shown as readable Unicode (→, ′, −, Ⓟ for a phosphate, •), checked against the slide fonts and OCR.
 
-Page citations mean the one-based page/slide position in the source file. A source may display a different printed slide number.
+## Fall 2025: Prof. Dr. Md. Rakibul Islam (MRIs)
+
+Source folder: `NSU Fall 2026/BIO103 - Fall 2025 - MRIS`.
+
+| Source file | Teaching slides |
+|---|---:|
+| Lecture 1-2 MRIs.pdf | 33 |
+| Lecture 3-5 MRIs.pdf | 65 |
+| Lecture 6-9 MRIs.pdf | 74 |
+| Lecture 10 MRIs.pdf | 27 |
+| Lecture 11-13 MRIs.pdf | 44 |
+| Lecture 13-15 MRIs.pdf | 37 |
+| Lecture 16 MRIs.pdf | 41 |
+| Lecture 17 Homeostasis.pdf | 13 |
+| Lecture 18 Blood.pdf | 19 |
+| Lecture 19 DigS MRIs.pdf | 25 |
+| Lecture 20_Respiratory _Excre.pdf | 17 |
+| Lecture 21 Food _ Nutrition.pdf | 22 |
+| Lecture 22_Diabetes_Lipid Profile.pptx | 22 |
+| **Total** | **439** |
+
+The 8-page `BIO 103.38_outline_Fall 2025.pdf` is listed as a reference and generates no practice.
+
+- PDF text comes from the PDF text layer (`pdftotext`); the PowerPoint's text from its OOXML. Its four hidden slides are included.
+- Dashboard covers are original figures extracted from the PDFs (`data/covers.json` records page, method and hashes).
+- Local Apple Vision OCR read the text inside every slide image (`data/source-ocr.json` for Fall 2025, `data/mbmd-ocr.jsonl` for Fall 2026). OCR is shown only as a labelled supplement and never used for practice.
+
+## Notes, flashcards and questions
+
+- **Slide text** is the slide's text re-flowed into bullets. Only whitespace, bullet glyphs, page numbers and instructor footers are removed; the validator checks every note is a literal part of the slide text.
+- **Flashcards**: Fall 2025 uses 167 curator-chosen spans (`scripts/practice_spans.json`) with character offsets into the slide text. Fall 2026's 164 cards come from defining sentences in the slides, reviewed in `scripts/card_review_fall2026.json`.
+- **Questions** (374 for Fall 2025, 418 for Fall 2026) are generated by `scripts/build_course.py`:
+  - every option in a question is a slide term, or every option is a slide description, from the same lecture (or, when a lecture has few cards, the same part of the course);
+  - distractors come from nearby slides where possible, so organs compete with organs and enzymes with enzymes;
+  - a fill-in never uses distractors that appear on the same slide, since they could also fit;
+  - the answer and the distractors never appear in the prompt; no option contains another; if the answer shares a word with the prompt, at least two distractors do too;
+  - where a description named its own term, that term is blanked; in a "which line describes" question either every option has a blank or none does, so the layout never points at the answer;
+  - fifteen Fall 2025 option sets use hand-reviewed distractors (`scripts/practice_distractors.json`).
+- **Short-answer prompts** (175 for Fall 2026, 146 for Fall 2025) come from the slides' own structure: comparison tables become "Write the differences between A and B", question-titled slides with two to eight points become that question, and definition cards become "Define …". The model answer shown is the slide's literal text, checked by the validator.
+
+Page citations are the one-based page or slide position in the source file; a slide may print a different number.
 
 ## Reproduce and verify
 
-From this application directory:
+From this app's directory:
 
 ```sh
-python3 scripts/extract_course.py --source-dir '/path/to/BIO103 - Fall 2025 - MRIS'
-python3 scripts/extract_covers.py
+python3 scripts/extract_course.py
+python3 scripts/extract_fall2026.py
+python3 scripts/build_course.py
 python3 scripts/validate_course.py --reextract
 ```
-
-Extraction requires Python 3, Pillow, Poppler (`pdftotext`, `pdfinfo`, `pdftoppm`) and LibreOffice. The basic `validate_course.py` check only needs Python's standard library; `--reextract` additionally uses the extraction dependencies to compare every recorded text layer against the copied source files. The application itself does not need these tools at runtime.
-
-Validation checks source and visual hashes, complete ordered slide coverage, exact card substrings, correct quiz answer indexing, four distinct options, source-only distractors, source-only explanations, and the outline's exclusion from practice.

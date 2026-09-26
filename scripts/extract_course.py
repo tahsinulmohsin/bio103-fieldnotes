@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Rebuild the course exclusively from the user-supplied local files.
+"""Extract the Fall 2025 (MRIS) course exclusively from the user-supplied local files.
 
 Requires Python 3 + Pillow, pdftotext, pdfinfo, pdftoppm, and LibreOffice.
 No network access, generative model, external textbook, or medical reference is used.
-Text spans in flashcards are literal substrings of the recorded extraction.
+Flashcards come from curator-selected spans (scripts/practice_spans.json) and are literal
+substrings of the recorded extraction. Output: data/extracted/fall2025.json; notes and
+questions are built separately by scripts/build_course.py.
 """
 from __future__ import annotations
 import argparse
@@ -19,7 +21,8 @@ from urllib.parse import quote
 from PIL import Image
 
 APP = Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE = Path('/Users/tahsinulmohsin/NSU Fall 2026/BIO103 - Fall 2025 - MRIS')
+DEFAULT_SOURCE = APP.parents[2]  # the 'BIO103 - Fall 2025 - MRIS' folder that holds this app
+OUT_FILE = APP / 'data/extracted/fall2025.json'
 MODULES = [
     ('introduction', 'Lecture 1-2 MRIs.pdf', 'Introduction to Biology', 'Lectures 1–2', 'Foundations', 3),
     ('chemistry', 'Lecture 3-5 MRIs.pdf', 'Chemistry of Life', 'Lectures 3–5', 'Foundations', 36),
@@ -35,6 +38,13 @@ MODULES = [
     ('nutrition', 'Lecture 21 Food _ Nutrition.pdf', 'Food and Nutrition', 'Lecture 21', 'Food & metabolism', 3),
     ('diabetes-lipids', 'Lecture 22_Diabetes_Lipid Profile.pptx', 'Diabetes & Lipid Profile', 'Lecture 22', 'Food & metabolism', 4),
 ]
+
+
+def find_soffice():
+    for candidate in (shutil.which('soffice'), '/Applications/LibreOffice.app/Contents/MacOS/soffice'):
+        if candidate and Path(candidate).exists():
+            return candidate
+    raise FileNotFoundError('LibreOffice (soffice) is required to render the PowerPoint deck')
 
 
 def command(args):
@@ -100,7 +110,7 @@ def extract_one(item, source_dir, work_dir, rerender):
     if original.suffix.lower() == '.pptx':
         pdf = work_dir / (original.stem + '.pdf')
         if not pdf.exists():
-            command(['soffice', '--headless', '--convert-to', 'pdf:impress_pdf_Export:{"ExportHiddenSlides":{"type":"boolean","value":"true"}}', '--outdir', str(work_dir), str(original)])
+            command([find_soffice(), '--headless', '--convert-to', 'pdf:impress_pdf_Export:{"ExportHiddenSlides":{"type":"boolean","value":"true"}}', '--outdir', str(work_dir), str(original)])
         pages = get_pptx_text(original)
         layout_pages = split_pages(command(['pdftotext', '-layout', str(pdf), '-']))
         shutil.copy2(pdf, APP / 'public/sources' / pdf.name)
@@ -144,11 +154,10 @@ def extract_one(item, source_dir, work_dir, rerender):
     return {'id': module_id, 'title': title, 'lectureLabel': lecture, 'category': category,
             'description': ' · '.join(dict.fromkeys(s['title'] for s in slides[1:4])),
             'source': source, 'cover': f'/slides/{module_id}/{cover:03d}.webp',
-            'slides': slides, 'flashcards': [], 'quiz': []}
+            'slides': slides, 'flashcards': []}
 
 
-def add_practice(module, specs):
-    reviewed_options = json.loads((APP / 'scripts/practice_distractors.json').read_text())
+def add_cards(module, specs):
     for i, spec in enumerate(specs):
         page, term, definition = spec
         slide = module['slides'][page - 1]
@@ -162,38 +171,12 @@ def add_practice(module, specs):
             'definition': literal_definition, 'slideId': slide['id'], 'page': page,
             'termSource': term_span, 'definitionSource': def_span,
         })
-    cards = module['flashcards']
-    for index, card in enumerate(cards):
-        alternatives = [other for other in cards if other['id'] != card['id'] and other['term'].lower() != card['term'].lower()]
-        # Deterministic options make builds and validation reproducible; every distractor
-        # is a literal term from this same source file, not an invented false fact.
-        alternatives = alternatives[index % len(alternatives):] + alternatives[:index % len(alternatives)]
-        distractors = alternatives[:3]
-        question_id = f'{module["id"]}-quiz-{index+1:02d}'
-        if question_id in reviewed_options:
-            by_term = {' '.join(c['term'].split()): c for c in cards}
-            distractors = [by_term[term] for term in reviewed_options[question_id]]
-        correct = index % (len(distractors) + 1)
-        selected = distractors[:]
-        selected.insert(correct, card)
-        term_pattern = r'(?<!\w)' + r'\s+'.join(re.escape(x) for x in card['term'].split()) + r'(?!\w)'
-        prompt_quote, blanks = re.subn(term_pattern, '________', card['definition'], flags=re.I)
-        question_stem = 'Which slide term completes this description?' if blanks else 'Which slide term matches this description?'
-        module['quiz'].append({
-            'id': question_id,
-            'prompt': question_stem + '\n\n“' + prompt_quote + '”',
-            'promptStyle': 'cloze' if blanks else 'matching',
-            'options': [c['term'] for c in selected], 'correctIndex': correct,
-            'explanation': card['definition'], 'slideId': card['slideId'], 'page': card['page'],
-            'sourceQuote': card['definition'], 'sourceCardId': card['id'],
-            'optionSources': [{'slideId': c['slideId'], 'page': c['page'], 'span': c['termSource']} for c in selected],
-        })
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--source-dir', type=Path, default=DEFAULT_SOURCE)
-    parser.add_argument('--work-dir', type=Path, default=APP.parent.parent / 'work/extraction')
+    parser.add_argument('--work-dir', type=Path, default=APP / '.cache/fall2025')
     parser.add_argument('--rerender', action='store_true')
     args = parser.parse_args()
     args.work_dir.mkdir(parents=True, exist_ok=True)
@@ -206,21 +189,21 @@ def main():
     specs = json.loads((APP / 'scripts/practice_spans.json').read_text())
     for number, module in enumerate(modules, 1):
         module['number'] = number
-        add_practice(module, specs[module['id']])
+        add_cards(module, specs[module['id']])
     course = {
-        'version': '1.0.0', 'title': 'NSU BIO103',
+        'semester': 'fall2025', 'term': 'Fall 2025',
+        'instructor': 'Prof. Dr. Md. Rakibul Islam (MRIs)', 'institution': 'North South University',
         'sourcePolicy': 'All biology content comes exclusively from the supplied NSU BIO103 files. Definitions and answer explanations are literal source text. Original slide images preserve diagrams and embedded labels. No external biology sources are used.',
         'extractionNotes': [
             'Page numbers refer to the PDF page or PPTX slide position; printed slide numbers may differ.',
             'Extracted text preserves source wording, spelling, symbols and line breaks. Diagrams and text embedded in images remain available in every original slide visual.',
             'The PPTX visuals are rendered by LibreOffice; editable slide text is extracted directly from its OOXML.',
             'The course outline is reference material only and does not generate practice.',
-            'Module titles and categories organize the supplied topics; question stems are generic matching instructions and add no biology facts.',
+            'Module titles and categories organize the supplied topics.',
         ],
         'stats': {'moduleCount': len(modules), 'slideCount': sum(len(m['slides']) for m in modules),
                   'referencePageCount': sum(len(m['slides']) for m in references),
-                  'flashcardCount': sum(len(m['flashcards']) for m in modules),
-                  'quizCount': sum(len(m['quiz']) for m in modules)},
+                  'flashcardCount': sum(len(m['flashcards']) for m in modules)},
         'modules': modules, 'references': references,
     }
     ocr_file = APP / 'data/source-ocr.json'
@@ -242,7 +225,8 @@ def main():
         for module in modules:
             if module['id'] in cover_records:
                 module.update(cover_records[module['id']])
-    (APP / 'data/course.json').write_text(json.dumps(course, ensure_ascii=False, indent=2))
+    OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    OUT_FILE.write_text(json.dumps(course, ensure_ascii=False, indent=2))
     print(json.dumps(course['stats']), flush=True)
 
 

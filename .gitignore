@@ -1,6 +1,22 @@
+# dependencies and builds
 node_modules/
 .next/
+*.tsbuildinfo
+
+# secrets and platform state (never commit)
 .env*
 !.env.example
-*.tsbuildinfo
 .vercel
+
+# local caches and working files
+.cache/
+__pycache__/
+scratch/
+qa/
+.claude-flow/
+tools/ui-qa/out/
+*.log
+.DS_Store
+
+# compiled OCR helper (build it from scripts/ocr_source.swift)
+scripts/ocr-source

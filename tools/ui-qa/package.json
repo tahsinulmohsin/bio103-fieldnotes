@@ -1,0 +1,15 @@
+{
+  "name": "bio103-fieldnotes-ui-qa",
+  "private": true,
+  "description": "Screenshot, layout and accessibility checks for the BIO103 Fieldnotes UI.",
+  "type": "module",
+  "scripts": {
+    "capture": "node review-capture.mjs out",
+    "measure": "node measure-read.mjs",
+    "screenshots": "node readme-shots.mjs ../../docs/screenshots"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "playwright": "^1.55.0"
+  }
+}

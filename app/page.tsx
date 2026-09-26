@@ -1,13 +1,17 @@
 import StudyApp from "@/components/study-app";
-import courseFall2026 from "@/data/course-fall2026.json";
-import courseFall2025 from "@/data/course.json";
-import type { Course } from "@/lib/types";
+import { courseIndex, courses } from "@/lib/courses";
+import { version } from "@/lib/version";
 
 export default function Home() {
+  // Only the index (titles, counts, slide lists) ships with the page;
+  // each topic's notes, cards and questions load when it is opened.
   return (
     <StudyApp
-      courseFall2026={courseFall2026 as unknown as Course}
-      courseFall2025={courseFall2025 as unknown as Course}
+      courses={{
+        fall2026: courseIndex(courses.fall2026),
+        fall2025: courseIndex(courses.fall2025),
+      }}
+      version={version}
     />
   );
 }

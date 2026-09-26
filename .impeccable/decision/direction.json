@@ -1,0 +1,132 @@
+{
+  "title": "Choose the look for Fieldnotes",
+  "question": "The roll assigned the Practical Notebook. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Practical Notebook",
+      "kicker": "THE ROLL",
+      "lineage": "The biology practical copy: ruled writing page facing a plain diagram page, marked in red by the teacher",
+      "thesis": "Every slide becomes a practical-copy spread: the lecturer's figure on the plain page, its explanation on the ruled page, your answers marked in the margin.",
+      "palette": ["#1f5a3d", "#fbfcfa", "#2b302d", "#c9d5de", "#c8433a"],
+      "materials": ["ruled practical paper", "pencil graphite", "red marking ink"],
+      "viewport": "Opens on the next unread slide: the figure large on the plain page, the explanation on the ruled page, a numbered slide strip on top, one green Next in the margin bar.",
+      "risk": "Ruling can turn into costume; it must organise the page (margin column, rules as dividers), never sit behind the text.",
+      "raised": [
+        {"from": "challenger-pc98", "raise": "Regions never move: figure, explanation and action bar hold their places; changing slides swaps contents only."},
+        {"from": "challenger-bench", "raise": "One commit colour: forest green is spent only on the single action that moves you forward."},
+        {"from": "challenger-steprow", "raise": "A slide strip always shows where you are: read slides filled, the current one outlined."},
+        {"from": "challenger-crt", "raise": "Every size and gap comes from one fixed grid; nothing sits off it."},
+        {"from": "challenger-dive", "raise": "The stage is always marked: Read, Recall, Practise, with missed items as the way back."},
+        {"from": "challenger-cyclorama", "raise": "No state rides on colour alone: every mark is a word plus a shape (✓ Correct, ✕ Not quite)."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Lecture Handout",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "PowerPoint 'Handouts, 3 slides per page', photocopied before every exam",
+      "thesis": "The lecture as the handout students already print: each slide beside a lined note column, three to a sheet.",
+      "palette": ["#1f5a3d", "#ffffff", "#1c1f1d", "#d9dedb"],
+      "materials": ["photocopy toner", "A4 handout", "highlighter"],
+      "viewport": "A scrolling handout: every slide with its explanation in the lined column beside it; you scroll the lecture like flipping printed sheets.",
+      "risk": "Closest to today's split layout and to what most study apps ship: familiar more than distinctive."
+    },
+    {
+      "id": "challenger-pc98",
+      "label": "PC-98 Sixteen-Colour Screen",
+      "verdict": "declined",
+      "lineage": "Japanese sixteen-colour computer screens, 640 by 400",
+      "thesis": "Fixed screen regions, a text window docked low, artwork owning the frame.",
+      "palette": ["#1a1a40", "#e0e0e0", "#ff5555", "#55ffff"],
+      "materials": ["bitmap type", "dithered fills"],
+      "viewport": "The slide as the artwork, the explanation in a docked text window.",
+      "case": "Fuses poorly: students don't read biology through retro game screens, and bitmap type hurts long reading.",
+      "kept": "Fixed regions; only contents swap.",
+      "risk": "Novelty over study.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-pc98-sixteen-color-field-hero.webp"
+    },
+    {
+      "id": "challenger-bench",
+      "label": "Creator Hardware Bench",
+      "verdict": "declined",
+      "lineage": "desk instruments with keycaps, knobs and one orange key",
+      "thesis": "Every function a physical key; one orange key commits.",
+      "palette": ["#3a3d40", "#d8d4cc", "#ff6a13", "#ffb000"],
+      "materials": ["keycaps", "gunmetal"],
+      "viewport": "A key grid of lecture functions with an amber status screen.",
+      "case": "Fuses poorly: a hardware panel says 'tool', not 'lecture', and leaves the slide no room.",
+      "kept": "One reserved commit colour.",
+      "risk": "Gadget cosplay.",
+      "hero": "https://impeccable.style/worlds/cards/design-canon-creator-hardware-bench-hero.webp"
+    },
+    {
+      "id": "challenger-steprow",
+      "label": "Drum Machine Step Row",
+      "verdict": "declined",
+      "lineage": "early-80s rhythm machines",
+      "thesis": "A row of step keys with a chase light that always shows where now is.",
+      "palette": ["#2a2a2a", "#e2231a", "#f58220", "#ffd200"],
+      "materials": ["silkscreen", "LED keys"],
+      "viewport": "The lecture's slides as a lit step row.",
+      "case": "Fuses in one place only: the step row maps to slides, but the machine world has nothing to do with biology.",
+      "kept": "A strip that always shows where you are.",
+      "risk": "Toy-like.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row-hero.webp"
+    },
+    {
+      "id": "challenger-crt",
+      "label": "CRT Arcade Screen",
+      "verdict": "declined",
+      "lineage": "pixel-art arcade cabinets",
+      "thesis": "Fat pixels, scanlines and palette laws on a strict tile grid.",
+      "palette": ["#050505", "#ffcc00", "#00e5ff", "#ff2e88"],
+      "materials": ["phosphor", "scanlines"],
+      "viewport": "A tile-grid lecture screen with glowing score type.",
+      "case": "Fuses poorly: glow and scanlines fight small slide text.",
+      "kept": "Every size from one fixed grid.",
+      "risk": "Unreadable diagrams.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-crt-arcade-pixel-glow-hero.webp"
+    },
+    {
+      "id": "challenger-dive",
+      "label": "Mesophotic Deep Dive",
+      "verdict": "declined",
+      "lineage": "technical dives down a reef wall",
+      "thesis": "Descend through stages; one band marks the active depth.",
+      "palette": ["#061a33", "#1fb6c9", "#f4f7f8"],
+      "materials": ["abyssal blue", "marine snow"],
+      "viewport": "The lecture as a descent with depth markers.",
+      "case": "Fuses poorly: the dive metaphor needs explaining before anyone can study.",
+      "kept": "The current stage is always marked.",
+      "risk": "Metaphor before content.",
+      "hero": "https://impeccable.style/worlds/cards/rivers-tides-ocean-depths-mesophotic-deep-dive-hero.webp"
+    },
+    {
+      "id": "challenger-cyclorama",
+      "label": "Cyclorama Dawn",
+      "verdict": "declined",
+      "lineage": "theatre lighting on a curved backdrop",
+      "thesis": "Labelled light phases, never colour alone.",
+      "palette": ["#0b0b12", "#2b48c8", "#e98aa0", "#ffffff"],
+      "materials": ["light bands", "stencil caps"],
+      "viewport": "Horizon bands carrying each lecture phase.",
+      "case": "Fuses poorly: atmosphere over information, nothing to read.",
+      "kept": "No state carried by colour alone.",
+      "risk": "All mood.",
+      "hero": "https://impeccable.style/worlds/cards/stagecraft-theater-lighting-cyclorama-dawn-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code" },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A clean study app in forest green: top bar, lecture grid, reader, flashcards, quiz.",
+    "palette": ["#ffffff", "#111a15", "#1f5a3d"],
+    "materials": ["clean grid", "system UI"],
+    "viewport": "Top bar with a lecture switcher, a reader with slide and notes, familiar quiz cards.",
+    "risk": "Looks like every other study app, by design."
+  },
+  "steer": true
+}

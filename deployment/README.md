@@ -1,6 +1,6 @@
 # BIO103 homelab deployment
 
-The app uses a three-stage Node 24 Alpine image and Next.js standalone output. The final image contains the server and public learning assets. It runs as UID 1001 with a read-only filesystem, no added Linux capabilities, a bounded writable cache, and a health check at `/api/health`. Learning progress remains in each browser's local storage.
+The app uses a three-stage Node 24 Alpine image and Next.js standalone output. The final image contains the server, the prerendered topic data and the public learning assets. `compose.yaml` runs it as UID 1001 with a read-only root filesystem, all Linux capabilities dropped, `no-new-privileges`, tmpfs mounts for `/tmp` and the Next.js cache, and a health check at `/api/health`. Learning progress stays in each browser's local storage.
 
 ## Target
 
@@ -8,12 +8,17 @@ The app uses a three-stage Node 24 Alpine image and Next.js standalone output. T
 - Container/image: `bio103-fieldnotes`.
 - Proposed public hostname: `bio103.giggly.store.cv`.
 - Private origin: Docker network `bio103-ingress`, container port `3000`.
-- Host loopback health endpoint: `http://127.0.0.1:3103/api/health`.
+- LAN address: `http://192.168.31.10:3103/` (Compose publishes port 3103 on all interfaces).
+- Health endpoint: `http://192.168.31.10:3103/api/health`.
 - Route: Cloudflare HTTPS → existing Cloudflare Tunnel → Nginx Proxy Manager → app.
 
 The existing Cloudflare credential is scoped to `giggly.store.cv`. Existing tunnel hostnames and Nginx Proxy Manager routes must remain intact. No Cloudflare token, private key, database password, or account credential belongs in this repository.
 
-## Build and start on the server
+## Deploy from this computer
+
+`./deploy.sh` rsyncs this folder to `~/bio103` on the server (skipping `node_modules`, `.next`, `.cache` and similar), tags the running image as `bio103-fieldnotes:previous`, builds the new image while the old container keeps serving, recreates the container and waits for `/api/health` to return 200.
+
+## Build and start on the server manually
 
 Run in the copied application directory after installing its source and assets:
 
@@ -58,8 +63,8 @@ Open the public site and test the explanation → recall → quiz flow. Containe
 
 ## Rollback
 
-Tag the previous image before replacing it and retain the prior tunnel configuration and app-specific Nginx route. To roll back the application, set `BIO103_IMAGE_TAG` to the retained image tag and run `docker compose up -d --wait`. To remove this deployment, stop only this Compose project, remove only its proxy route and tunnel hostname, and delete only its DNS record. Never prune all containers, networks, images, or Cloudflare routes.
+`deploy.sh` keeps the image it replaces as `bio103-fieldnotes:previous`. To roll back, run `BIO103_IMAGE_TAG=previous docker compose up -d --wait` in `~/bio103` on the server. To remove this deployment, stop only this Compose project, remove only its proxy route and tunnel hostname, and delete only its DNS record. Never prune all containers, networks, images, or Cloudflare routes.
 
 ## Status
 
-Deployment discovery completed. Live deployment verification will be recorded after the app passes its local QA and the container is built on the server.
+The container runs on the homelab and is reachable on the LAN at port 3103. The public route (Nginx Proxy Manager host and Cloudflare tunnel hostname for `bio103.giggly.store.cv`) has not been applied; the hostname does not resolve. Apply it with the scripts above only if the app should be reachable from the internet, and consider a Cloudflare Access policy first, since the original lecture files are served to anyone who can reach the app.

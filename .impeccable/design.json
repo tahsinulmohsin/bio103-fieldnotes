@@ -1,0 +1,905 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-25T07:58:26+00:00",
+  "title": "Design System: fieldnotes",
+  "extensions": {
+    "colorMeta": {
+      "forest-ink": {
+        "role": "primary",
+        "displayName": "Forest Ink",
+        "canonical": "oklch(42.0% 0.078 158.7)",
+        "tonalRamp": [
+          "oklch(15% 0.078 158.7)",
+          "oklch(26% 0.078 158.7)",
+          "oklch(38% 0.078 158.7)",
+          "oklch(49% 0.078 158.7)",
+          "oklch(61% 0.078 158.7)",
+          "oklch(72% 0.078 158.7)",
+          "oklch(84% 0.078 158.7)",
+          "oklch(95% 0.078 158.7)"
+        ],
+        "cssVar": "--brand",
+        "theme": "light"
+      },
+      "forest-fill": {
+        "role": "primary",
+        "displayName": "Forest Fill",
+        "canonical": "oklch(42.0% 0.078 158.7)",
+        "tonalRamp": [
+          "oklch(15% 0.078 158.7)",
+          "oklch(26% 0.078 158.7)",
+          "oklch(38% 0.078 158.7)",
+          "oklch(49% 0.078 158.7)",
+          "oklch(61% 0.078 158.7)",
+          "oklch(72% 0.078 158.7)",
+          "oklch(84% 0.078 158.7)",
+          "oklch(95% 0.078 158.7)"
+        ],
+        "cssVar": "--brand-fill",
+        "theme": "light"
+      },
+      "forest-fill-hover": {
+        "role": "primary",
+        "displayName": "Forest Fill Hover",
+        "canonical": "oklch(36.1% 0.069 157.8)",
+        "tonalRamp": [
+          "oklch(15% 0.069 157.8)",
+          "oklch(26% 0.069 157.8)",
+          "oklch(38% 0.069 157.8)",
+          "oklch(49% 0.069 157.8)",
+          "oklch(61% 0.069 157.8)",
+          "oklch(72% 0.069 157.8)",
+          "oklch(84% 0.069 157.8)",
+          "oklch(95% 0.069 157.8)"
+        ],
+        "cssVar": "--brand-fill-hover",
+        "theme": "light"
+      },
+      "on-forest": {
+        "role": "primary",
+        "displayName": "On Forest",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(38% 0.000 89.9)",
+          "oklch(49% 0.000 89.9)",
+          "oklch(61% 0.000 89.9)",
+          "oklch(72% 0.000 89.9)",
+          "oklch(84% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ],
+        "cssVar": "--on-brand",
+        "theme": "light"
+      },
+      "right-ink": {
+        "role": "primary",
+        "displayName": "Right Ink",
+        "canonical": "oklch(47.0% 0.099 156.4)",
+        "tonalRamp": [
+          "oklch(15% 0.099 156.4)",
+          "oklch(26% 0.099 156.4)",
+          "oklch(38% 0.099 156.4)",
+          "oklch(49% 0.099 156.4)",
+          "oklch(61% 0.099 156.4)",
+          "oklch(72% 0.099 156.4)",
+          "oklch(84% 0.099 156.4)",
+          "oklch(95% 0.099 156.4)"
+        ],
+        "cssVar": "--right",
+        "theme": "light"
+      },
+      "right-wash": {
+        "role": "primary",
+        "displayName": "Right Wash",
+        "canonical": "oklch(94.5% 0.019 157.9)",
+        "tonalRamp": [
+          "oklch(15% 0.019 157.9)",
+          "oklch(26% 0.019 157.9)",
+          "oklch(38% 0.019 157.9)",
+          "oklch(49% 0.019 157.9)",
+          "oklch(61% 0.019 157.9)",
+          "oklch(72% 0.019 157.9)",
+          "oklch(84% 0.019 157.9)",
+          "oklch(95% 0.019 157.9)"
+        ],
+        "cssVar": "--right-soft",
+        "theme": "light"
+      },
+      "red-marking-ink": {
+        "role": "secondary",
+        "displayName": "Red Marking Ink",
+        "canonical": "oklch(51.9% 0.162 28.9)",
+        "tonalRamp": [
+          "oklch(15% 0.120 28.9)",
+          "oklch(26% 0.120 28.9)",
+          "oklch(38% 0.120 28.9)",
+          "oklch(49% 0.120 28.9)",
+          "oklch(61% 0.120 28.9)",
+          "oklch(72% 0.120 28.9)",
+          "oklch(84% 0.120 28.9)",
+          "oklch(95% 0.120 28.9)"
+        ],
+        "cssVar": "--wrong",
+        "theme": "light"
+      },
+      "red-wash": {
+        "role": "secondary",
+        "displayName": "Red Wash",
+        "canonical": "oklch(95.0% 0.019 29.5)",
+        "tonalRamp": [
+          "oklch(15% 0.019 29.5)",
+          "oklch(26% 0.019 29.5)",
+          "oklch(38% 0.019 29.5)",
+          "oklch(49% 0.019 29.5)",
+          "oklch(61% 0.019 29.5)",
+          "oklch(72% 0.019 29.5)",
+          "oklch(84% 0.019 29.5)",
+          "oklch(95% 0.019 29.5)"
+        ],
+        "cssVar": "--wrong-soft",
+        "theme": "light"
+      },
+      "margin-red": {
+        "role": "secondary",
+        "displayName": "Margin Red",
+        "canonical": "oklch(67.3% 0.112 27.3)",
+        "tonalRamp": [
+          "oklch(15% 0.112 27.3)",
+          "oklch(26% 0.112 27.3)",
+          "oklch(38% 0.112 27.3)",
+          "oklch(49% 0.112 27.3)",
+          "oklch(61% 0.112 27.3)",
+          "oklch(72% 0.112 27.3)",
+          "oklch(84% 0.112 27.3)",
+          "oklch(95% 0.112 27.3)"
+        ],
+        "cssVar": "--margin",
+        "theme": "light"
+      },
+      "desk": {
+        "role": "neutral",
+        "displayName": "Desk",
+        "canonical": "oklch(95.4% 0.007 132.4)",
+        "tonalRamp": [
+          "oklch(15% 0.007 132.4)",
+          "oklch(26% 0.007 132.4)",
+          "oklch(38% 0.007 132.4)",
+          "oklch(49% 0.007 132.4)",
+          "oklch(61% 0.007 132.4)",
+          "oklch(72% 0.007 132.4)",
+          "oklch(84% 0.007 132.4)",
+          "oklch(95% 0.007 132.4)"
+        ],
+        "cssVar": "--bg",
+        "theme": "light"
+      },
+      "practical-paper": {
+        "role": "neutral",
+        "displayName": "Practical Paper",
+        "canonical": "oklch(99.0% 0.003 128.5)",
+        "tonalRamp": [
+          "oklch(15% 0.003 128.5)",
+          "oklch(26% 0.003 128.5)",
+          "oklch(38% 0.003 128.5)",
+          "oklch(49% 0.003 128.5)",
+          "oklch(61% 0.003 128.5)",
+          "oklch(72% 0.003 128.5)",
+          "oklch(84% 0.003 128.5)",
+          "oklch(95% 0.003 128.5)"
+        ],
+        "cssVar": "--page",
+        "theme": "light"
+      },
+      "plain-page": {
+        "role": "neutral",
+        "displayName": "Plain Page",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(38% 0.000 89.9)",
+          "oklch(49% 0.000 89.9)",
+          "oklch(61% 0.000 89.9)",
+          "oklch(72% 0.000 89.9)",
+          "oklch(84% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ],
+        "cssVar": "--page-plain",
+        "theme": "light"
+      },
+      "quiet-fill": {
+        "role": "neutral",
+        "displayName": "Quiet Fill",
+        "canonical": "oklch(97.0% 0.006 137.8)",
+        "tonalRamp": [
+          "oklch(15% 0.006 137.8)",
+          "oklch(26% 0.006 137.8)",
+          "oklch(38% 0.006 137.8)",
+          "oklch(49% 0.006 137.8)",
+          "oklch(61% 0.006 137.8)",
+          "oklch(72% 0.006 137.8)",
+          "oklch(84% 0.006 137.8)",
+          "oklch(95% 0.006 137.8)"
+        ],
+        "cssVar": "--raise",
+        "theme": "light"
+      },
+      "blue-grey-rule": {
+        "role": "neutral",
+        "displayName": "Blue-Grey Rule",
+        "canonical": "oklch(88.9% 0.013 236.6)",
+        "tonalRamp": [
+          "oklch(15% 0.013 236.6)",
+          "oklch(26% 0.013 236.6)",
+          "oklch(38% 0.013 236.6)",
+          "oklch(49% 0.013 236.6)",
+          "oklch(61% 0.013 236.6)",
+          "oklch(72% 0.013 236.6)",
+          "oklch(84% 0.013 236.6)",
+          "oklch(95% 0.013 236.6)"
+        ],
+        "cssVar": "--rule",
+        "theme": "light"
+      },
+      "blue-grey-rule-strong": {
+        "role": "neutral",
+        "displayName": "Blue-Grey Rule Strong",
+        "canonical": "oklch(79.0% 0.023 239.5)",
+        "tonalRamp": [
+          "oklch(15% 0.023 239.5)",
+          "oklch(26% 0.023 239.5)",
+          "oklch(38% 0.023 239.5)",
+          "oklch(49% 0.023 239.5)",
+          "oklch(61% 0.023 239.5)",
+          "oklch(72% 0.023 239.5)",
+          "oklch(84% 0.023 239.5)",
+          "oklch(95% 0.023 239.5)"
+        ],
+        "cssVar": "--rule-strong",
+        "theme": "light"
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "oklch(25.7% 0.010 164.1)",
+        "tonalRamp": [
+          "oklch(15% 0.010 164.1)",
+          "oklch(26% 0.010 164.1)",
+          "oklch(38% 0.010 164.1)",
+          "oklch(49% 0.010 164.1)",
+          "oklch(61% 0.010 164.1)",
+          "oklch(72% 0.010 164.1)",
+          "oklch(84% 0.010 164.1)",
+          "oklch(95% 0.010 164.1)"
+        ],
+        "cssVar": "--ink",
+        "theme": "light"
+      },
+      "graphite-soft": {
+        "role": "neutral",
+        "displayName": "Graphite Soft",
+        "canonical": "oklch(37.3% 0.015 161.4)",
+        "tonalRamp": [
+          "oklch(15% 0.015 161.4)",
+          "oklch(26% 0.015 161.4)",
+          "oklch(38% 0.015 161.4)",
+          "oklch(49% 0.015 161.4)",
+          "oklch(61% 0.015 161.4)",
+          "oklch(72% 0.015 161.4)",
+          "oklch(84% 0.015 161.4)",
+          "oklch(95% 0.015 161.4)"
+        ],
+        "cssVar": "--ink-2",
+        "theme": "light"
+      },
+      "graphite-muted": {
+        "role": "neutral",
+        "displayName": "Graphite Muted",
+        "canonical": "oklch(48.1% 0.017 162.0)",
+        "tonalRamp": [
+          "oklch(15% 0.017 162.0)",
+          "oklch(26% 0.017 162.0)",
+          "oklch(38% 0.017 162.0)",
+          "oklch(49% 0.017 162.0)",
+          "oklch(61% 0.017 162.0)",
+          "oklch(72% 0.017 162.0)",
+          "oklch(84% 0.017 162.0)",
+          "oklch(95% 0.017 162.0)"
+        ],
+        "cssVar": "--ink-3",
+        "theme": "light"
+      },
+      "focus-graphite": {
+        "role": "neutral",
+        "displayName": "Focus Graphite",
+        "canonical": "oklch(25.7% 0.010 164.1)",
+        "tonalRamp": [
+          "oklch(15% 0.010 164.1)",
+          "oklch(26% 0.010 164.1)",
+          "oklch(38% 0.010 164.1)",
+          "oklch(49% 0.010 164.1)",
+          "oklch(61% 0.010 164.1)",
+          "oklch(72% 0.010 164.1)",
+          "oklch(84% 0.010 164.1)",
+          "oklch(95% 0.010 164.1)"
+        ],
+        "cssVar": "--focus",
+        "theme": "light"
+      },
+      "selection-blue-grey": {
+        "role": "neutral",
+        "displayName": "Selection Blue-Grey",
+        "canonical": "oklch(86.7% 0.018 240.0)",
+        "tonalRamp": [
+          "oklch(15% 0.018 240.0)",
+          "oklch(26% 0.018 240.0)",
+          "oklch(38% 0.018 240.0)",
+          "oklch(49% 0.018 240.0)",
+          "oklch(61% 0.018 240.0)",
+          "oklch(72% 0.018 240.0)",
+          "oklch(84% 0.018 240.0)",
+          "oklch(95% 0.018 240.0)"
+        ],
+        "cssVar": "--select",
+        "theme": "light"
+      },
+      "forest-ink-dark": {
+        "role": "primary",
+        "displayName": "Forest Ink (Dark)",
+        "canonical": "oklch(81.1% 0.088 159.2)",
+        "tonalRamp": [
+          "oklch(15% 0.088 159.2)",
+          "oklch(26% 0.088 159.2)",
+          "oklch(38% 0.088 159.2)",
+          "oklch(49% 0.088 159.2)",
+          "oklch(61% 0.088 159.2)",
+          "oklch(72% 0.088 159.2)",
+          "oklch(84% 0.088 159.2)",
+          "oklch(95% 0.088 159.2)"
+        ],
+        "cssVar": "--brand",
+        "theme": "dark"
+      },
+      "forest-fill-dark": {
+        "role": "primary",
+        "displayName": "Forest Fill (Dark)",
+        "canonical": "oklch(52.0% 0.100 157.6)",
+        "tonalRamp": [
+          "oklch(15% 0.100 157.6)",
+          "oklch(26% 0.100 157.6)",
+          "oklch(38% 0.100 157.6)",
+          "oklch(49% 0.100 157.6)",
+          "oklch(61% 0.100 157.6)",
+          "oklch(72% 0.100 157.6)",
+          "oklch(84% 0.100 157.6)",
+          "oklch(95% 0.100 157.6)"
+        ],
+        "cssVar": "--brand-fill",
+        "theme": "dark"
+      },
+      "forest-fill-hover-dark": {
+        "role": "primary",
+        "displayName": "Forest Fill Hover (Dark)",
+        "canonical": "oklch(47.1% 0.089 158.5)",
+        "tonalRamp": [
+          "oklch(15% 0.089 158.5)",
+          "oklch(26% 0.089 158.5)",
+          "oklch(38% 0.089 158.5)",
+          "oklch(49% 0.089 158.5)",
+          "oklch(61% 0.089 158.5)",
+          "oklch(72% 0.089 158.5)",
+          "oklch(84% 0.089 158.5)",
+          "oklch(95% 0.089 158.5)"
+        ],
+        "cssVar": "--brand-fill-hover",
+        "theme": "dark"
+      },
+      "right-ink-dark": {
+        "role": "primary",
+        "displayName": "Right Ink (Dark)",
+        "canonical": "oklch(81.1% 0.088 159.2)",
+        "tonalRamp": [
+          "oklch(15% 0.088 159.2)",
+          "oklch(26% 0.088 159.2)",
+          "oklch(38% 0.088 159.2)",
+          "oklch(49% 0.088 159.2)",
+          "oklch(61% 0.088 159.2)",
+          "oklch(72% 0.088 159.2)",
+          "oklch(84% 0.088 159.2)",
+          "oklch(95% 0.088 159.2)"
+        ],
+        "cssVar": "--right",
+        "theme": "dark"
+      },
+      "right-wash-dark": {
+        "role": "primary",
+        "displayName": "Right Wash (Dark)",
+        "canonical": "oklch(28.3% 0.045 153.8)",
+        "tonalRamp": [
+          "oklch(15% 0.045 153.8)",
+          "oklch(26% 0.045 153.8)",
+          "oklch(38% 0.045 153.8)",
+          "oklch(49% 0.045 153.8)",
+          "oklch(61% 0.045 153.8)",
+          "oklch(72% 0.045 153.8)",
+          "oklch(84% 0.045 153.8)",
+          "oklch(95% 0.045 153.8)"
+        ],
+        "cssVar": "--right-soft",
+        "theme": "dark"
+      },
+      "red-marking-ink-dark": {
+        "role": "secondary",
+        "displayName": "Red Marking Ink (Dark)",
+        "canonical": "oklch(77.2% 0.108 27.5)",
+        "tonalRamp": [
+          "oklch(15% 0.108 27.5)",
+          "oklch(26% 0.108 27.5)",
+          "oklch(38% 0.108 27.5)",
+          "oklch(49% 0.108 27.5)",
+          "oklch(61% 0.108 27.5)",
+          "oklch(72% 0.108 27.5)",
+          "oklch(84% 0.108 27.5)",
+          "oklch(95% 0.108 27.5)"
+        ],
+        "cssVar": "--wrong",
+        "theme": "dark"
+      },
+      "red-wash-dark": {
+        "role": "secondary",
+        "displayName": "Red Wash (Dark)",
+        "canonical": "oklch(26.8% 0.048 26.7)",
+        "tonalRamp": [
+          "oklch(15% 0.048 26.7)",
+          "oklch(26% 0.048 26.7)",
+          "oklch(38% 0.048 26.7)",
+          "oklch(49% 0.048 26.7)",
+          "oklch(61% 0.048 26.7)",
+          "oklch(72% 0.048 26.7)",
+          "oklch(84% 0.048 26.7)",
+          "oklch(95% 0.048 26.7)"
+        ],
+        "cssVar": "--wrong-soft",
+        "theme": "dark"
+      },
+      "margin-red-dark": {
+        "role": "secondary",
+        "displayName": "Margin Red (Dark)",
+        "canonical": "oklch(47.7% 0.094 26.4)",
+        "tonalRamp": [
+          "oklch(15% 0.094 26.4)",
+          "oklch(26% 0.094 26.4)",
+          "oklch(38% 0.094 26.4)",
+          "oklch(49% 0.094 26.4)",
+          "oklch(61% 0.094 26.4)",
+          "oklch(72% 0.094 26.4)",
+          "oklch(84% 0.094 26.4)",
+          "oklch(95% 0.094 26.4)"
+        ],
+        "cssVar": "--margin",
+        "theme": "dark"
+      },
+      "bench-night": {
+        "role": "neutral",
+        "displayName": "Bench Night",
+        "canonical": "oklch(16.7% 0.009 169.0)",
+        "tonalRamp": [
+          "oklch(15% 0.009 169.0)",
+          "oklch(26% 0.009 169.0)",
+          "oklch(38% 0.009 169.0)",
+          "oklch(49% 0.009 169.0)",
+          "oklch(61% 0.009 169.0)",
+          "oklch(72% 0.009 169.0)",
+          "oklch(84% 0.009 169.0)",
+          "oklch(95% 0.009 169.0)"
+        ],
+        "cssVar": "--bg",
+        "theme": "dark"
+      },
+      "practical-paper-dark": {
+        "role": "neutral",
+        "displayName": "Practical Paper (Dark)",
+        "canonical": "oklch(20.8% 0.014 163.2)",
+        "tonalRamp": [
+          "oklch(15% 0.014 163.2)",
+          "oklch(26% 0.014 163.2)",
+          "oklch(38% 0.014 163.2)",
+          "oklch(49% 0.014 163.2)",
+          "oklch(61% 0.014 163.2)",
+          "oklch(72% 0.014 163.2)",
+          "oklch(84% 0.014 163.2)",
+          "oklch(95% 0.014 163.2)"
+        ],
+        "cssVar": "--page",
+        "theme": "dark"
+      },
+      "plain-page-dark": {
+        "role": "neutral",
+        "displayName": "Plain Page (Dark)",
+        "canonical": "oklch(18.8% 0.011 163.5)",
+        "tonalRamp": [
+          "oklch(15% 0.011 163.5)",
+          "oklch(26% 0.011 163.5)",
+          "oklch(38% 0.011 163.5)",
+          "oklch(49% 0.011 163.5)",
+          "oklch(61% 0.011 163.5)",
+          "oklch(72% 0.011 163.5)",
+          "oklch(84% 0.011 163.5)",
+          "oklch(95% 0.011 163.5)"
+        ],
+        "cssVar": "--page-plain",
+        "theme": "dark"
+      },
+      "quiet-fill-dark": {
+        "role": "neutral",
+        "displayName": "Quiet Fill (Dark)",
+        "canonical": "oklch(24.0% 0.017 163.1)",
+        "tonalRamp": [
+          "oklch(15% 0.017 163.1)",
+          "oklch(26% 0.017 163.1)",
+          "oklch(38% 0.017 163.1)",
+          "oklch(49% 0.017 163.1)",
+          "oklch(61% 0.017 163.1)",
+          "oklch(72% 0.017 163.1)",
+          "oklch(84% 0.017 163.1)",
+          "oklch(95% 0.017 163.1)"
+        ],
+        "cssVar": "--raise",
+        "theme": "dark"
+      },
+      "blue-grey-rule-dark": {
+        "role": "neutral",
+        "displayName": "Blue-Grey Rule (Dark)",
+        "canonical": "oklch(31.0% 0.023 163.1)",
+        "tonalRamp": [
+          "oklch(15% 0.023 163.1)",
+          "oklch(26% 0.023 163.1)",
+          "oklch(38% 0.023 163.1)",
+          "oklch(49% 0.023 163.1)",
+          "oklch(61% 0.023 163.1)",
+          "oklch(72% 0.023 163.1)",
+          "oklch(84% 0.023 163.1)",
+          "oklch(95% 0.023 163.1)"
+        ],
+        "cssVar": "--rule",
+        "theme": "dark"
+      },
+      "blue-grey-rule-strong-dark": {
+        "role": "neutral",
+        "displayName": "Blue-Grey Rule Strong (Dark)",
+        "canonical": "oklch(39.8% 0.027 163.2)",
+        "tonalRamp": [
+          "oklch(15% 0.027 163.2)",
+          "oklch(26% 0.027 163.2)",
+          "oklch(38% 0.027 163.2)",
+          "oklch(49% 0.027 163.2)",
+          "oklch(61% 0.027 163.2)",
+          "oklch(72% 0.027 163.2)",
+          "oklch(84% 0.027 163.2)",
+          "oklch(95% 0.027 163.2)"
+        ],
+        "cssVar": "--rule-strong",
+        "theme": "dark"
+      },
+      "graphite-dark": {
+        "role": "neutral",
+        "displayName": "Graphite (Dark)",
+        "canonical": "oklch(94.2% 0.010 155.1)",
+        "tonalRamp": [
+          "oklch(15% 0.010 155.1)",
+          "oklch(26% 0.010 155.1)",
+          "oklch(38% 0.010 155.1)",
+          "oklch(49% 0.010 155.1)",
+          "oklch(61% 0.010 155.1)",
+          "oklch(72% 0.010 155.1)",
+          "oklch(84% 0.010 155.1)",
+          "oklch(95% 0.010 155.1)"
+        ],
+        "cssVar": "--ink",
+        "theme": "dark"
+      },
+      "graphite-soft-dark": {
+        "role": "neutral",
+        "displayName": "Graphite Soft (Dark)",
+        "canonical": "oklch(85.0% 0.015 158.2)",
+        "tonalRamp": [
+          "oklch(15% 0.015 158.2)",
+          "oklch(26% 0.015 158.2)",
+          "oklch(38% 0.015 158.2)",
+          "oklch(49% 0.015 158.2)",
+          "oklch(61% 0.015 158.2)",
+          "oklch(72% 0.015 158.2)",
+          "oklch(84% 0.015 158.2)",
+          "oklch(95% 0.015 158.2)"
+        ],
+        "cssVar": "--ink-2",
+        "theme": "dark"
+      },
+      "graphite-muted-dark": {
+        "role": "neutral",
+        "displayName": "Graphite Muted (Dark)",
+        "canonical": "oklch(71.1% 0.020 162.7)",
+        "tonalRamp": [
+          "oklch(15% 0.020 162.7)",
+          "oklch(26% 0.020 162.7)",
+          "oklch(38% 0.020 162.7)",
+          "oklch(49% 0.020 162.7)",
+          "oklch(61% 0.020 162.7)",
+          "oklch(72% 0.020 162.7)",
+          "oklch(84% 0.020 162.7)",
+          "oklch(95% 0.020 162.7)"
+        ],
+        "cssVar": "--ink-3",
+        "theme": "dark"
+      },
+      "selection-blue-grey-dark": {
+        "role": "neutral",
+        "displayName": "Selection Blue-Grey (Dark)",
+        "canonical": "oklch(35.0% 0.027 236.0)",
+        "tonalRamp": [
+          "oklch(15% 0.027 236.0)",
+          "oklch(26% 0.027 236.0)",
+          "oklch(38% 0.027 236.0)",
+          "oklch(49% 0.027 236.0)",
+          "oklch(61% 0.027 236.0)",
+          "oklch(72% 0.027 236.0)",
+          "oklch(84% 0.027 236.0)",
+          "oklch(95% 0.027 236.0)"
+        ],
+        "cssVar": "--select",
+        "theme": "dark"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page titles and the recall card term; 1.5rem on phones."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Lecture title, slide title, Next-up lecture name, practice prompt."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings and the wordmark."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default UI text."
+      },
+      "prose": {
+        "displayName": "Prose",
+        "purpose": "Slide explanations, graphite soft, max 68ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, nav, tabs, segmented controls, meta rows."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Progress labels, provenance, slide-of counts, kbd; the 12px floor."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Every slide number, count and score, tabular."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet-lift",
+        "value": "0 12px 40px rgba(24, 38, 31, 0.18), 0 2px 8px rgba(24, 38, 31, 0.08)",
+        "purpose": "Zoom dialog only (light)."
+      },
+      {
+        "name": "sheet-lift-dark",
+        "value": "0 12px 40px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35)",
+        "purpose": "Zoom dialog only (dark)."
+      },
+      {
+        "name": "zoom-backdrop",
+        "value": "rgba(8, 14, 11, 0.72)",
+        "purpose": "Backdrop behind the enlarged slide."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "All transforms and drawn marks."
+      },
+      {
+        "name": "press",
+        "value": "transform scale(0.97), 120ms ease-out",
+        "purpose": "Button press."
+      },
+      {
+        "name": "state",
+        "value": "150ms ease",
+        "purpose": "Background and border colour changes on buttons and options."
+      },
+      {
+        "name": "card-flip",
+        "value": "rotateY(180deg), 320ms ease-out; instant from keyboard",
+        "purpose": "Recall card flip; cross-fade 150ms under reduced motion."
+      },
+      {
+        "name": "margin-mark",
+        "value": "stroke-dashoffset 1 to 0, 180ms ease-out; second stroke +90ms",
+        "purpose": "Tick and cross drawn in the margin."
+      },
+      {
+        "name": "progress-line",
+        "value": "scaleX, 200ms ease-out",
+        "purpose": "Progress bar fill; never animated width."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Removes press scale, flip, mark drawing and progress transition."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop",
+        "value": "1100px"
+      },
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "phone",
+        "value": "760px"
+      }
+    ],
+    "layout": {
+      "wrap": "1200px",
+      "wrapWide": "1440px",
+      "topbar": "56px",
+      "marginColumn": "56px (40px at <=760px)",
+      "readChrome": "380px",
+      "spreadColumns": "minmax(340px, 2fr) minmax(0, 3fr)"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one forward action per screen: Next, Continue at slide N, Got it, Had it, Check / Next question.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Next <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--rule-strong,#aebdc8);border-radius:6px;background:var(--page,#fbfcfa);color:var(--ink,#1f2522);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background-color 150ms ease,border-color 150ms ease,transform 120ms cubic-bezier(0.23,1,0.32,1)} .ds-btn-primary{background:var(--brand-fill,#1f5a3d);border-color:var(--brand-fill,#1f5a3d);color:var(--on-brand,#fff)} .ds-btn-primary:hover{background:var(--brand-fill-hover,#17482f);border-color:var(--brand-fill-hover,#17482f)} .ds-btn:active{transform:scale(.97)} .ds-btn:focus-visible{outline:2px solid var(--focus,#1f2522);outline-offset:2px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Every other action: Previous, Again, Recall cards, Practise.",
+      "html": "<button class=\"ds-btn2\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m12 19-7-7 7-7\"/><path d=\"M19 12H5\"/></svg> Previous</button>",
+      "css": ".ds-btn2{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--rule-strong,#aebdc8);border-radius:6px;background:var(--page,#fbfcfa);color:var(--ink,#1f2522);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:border-color 150ms ease,transform 120ms cubic-bezier(0.23,1,0.32,1)} .ds-btn2:hover{border-color:var(--ink-3,#56615b)} .ds-btn2:active{transform:scale(.97)} .ds-btn2:focus-visible{outline:2px solid var(--focus,#1f2522);outline-offset:2px}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Small inline actions such as Enlarge and Original under the figure.",
+      "html": "<button class=\"ds-btn-quiet\">Original <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></button>",
+      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 8px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--ink-2,#3a433e);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background-color 150ms ease} .ds-btn-quiet:hover{background:var(--raise,#f3f6f2)} .ds-btn-quiet:focus-visible{outline:2px solid var(--focus,#1f2522);outline-offset:2px}"
+    },
+    {
+      "name": "Stage Switch",
+      "kind": "nav",
+      "refersTo": "stage-tabs",
+      "description": "Read / Recall / Practise tabs; the current tab takes a graphite underline, never green.",
+      "html": "<nav class=\"ds-stages\"><button aria-current=\"step\">Read <span>30</span></button><button>Recall <span>15</span></button><button>Practise <span>51</span></button></nav>",
+      "css": ".ds-stages{display:flex;gap:4px;border-bottom:1px solid var(--rule,#d3dce2);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif} .ds-stages button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;background:none;color:var(--ink-3,#56615b);font:inherit;font-size:16px;font-weight:600;box-shadow:inset 0 -2px 0 transparent;cursor:pointer} .ds-stages button span{font-family:var(--font-mono),'Atkinson Hyperlegible Mono',monospace;font-size:12px;color:var(--ink-3,#56615b)} .ds-stages button[aria-current]{color:var(--ink,#1f2522);box-shadow:inset 0 -2px 0 var(--ink,#1f2522)} .ds-stages button:hover{color:var(--ink,#1f2522)} .ds-stages button:focus-visible{outline:2px solid var(--focus,#1f2522);outline-offset:2px}"
+    },
+    {
+      "name": "Slide Strip",
+      "kind": "nav",
+      "refersTo": "strip-cell",
+      "description": "Every slide as a numbered mono cell: read cells shaded with the rule tone, current cell outlined in graphite.",
+      "html": "<ol class=\"ds-strip\"><li><button data-read=\"true\">9</button></li><li><button data-read=\"true\">10</button></li><li><button aria-current=\"true\">11</button></li><li><button>12</button></li><li><button>13</button></li></ol>",
+      "css": ".ds-strip{display:flex;gap:4px;margin:0;padding:0;list-style:none} .ds-strip button{width:30px;height:30px;padding:0;border:1px solid var(--rule-strong,#aebdc8);border-radius:4px;background:var(--page,#fbfcfa);color:var(--ink-3,#56615b);font-family:var(--font-mono),'Atkinson Hyperlegible Mono',monospace;font-size:12px;font-variant-numeric:tabular-nums;cursor:pointer} .ds-strip button[data-read=true]{background:var(--rule,#d3dce2);color:var(--ink-2,#3a433e)} .ds-strip button[aria-current]{border:2px solid var(--ink,#1f2522);color:var(--ink,#1f2522);font-weight:700} .ds-strip button:focus-visible{outline:2px solid var(--focus,#1f2522);outline-offset:2px}"
+    },
+    {
+      "name": "Ruled Sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "Practical paper with a ruled margin column and a thin red margin line; slide number and pencil read-tick live in the margin.",
+      "html": "<section class=\"ds-sheet\"><div class=\"ds-sheet-margin\"><b>11</b><small>/30</small><svg class=\"ds-mark\" viewBox=\"0 0 28 28\" aria-hidden=\"true\"><path pathLength=\"1\" d=\"M5 15.5 L11.5 22 L23.5 6.5\"/></svg></div><div class=\"ds-sheet-body\"><h2>Eukaryotic cell: nucleus</h2><p>The <strong>nucleus</strong> is the defining organelle of eukaryotic cells.</p></div></section>",
+      "css": ".ds-sheet{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr);background:var(--page,#fbfcfa);border:1px solid var(--rule,#d3dce2);border-radius:10px;color:var(--ink,#1f2522);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif} .ds-sheet::before{content:'';position:absolute;top:0;bottom:0;left:56px;width:1px;background:var(--margin,#d27a70)} .ds-sheet-margin{padding:20px 8px 20px 0;text-align:center;color:var(--ink-3,#56615b);font-family:var(--font-mono),'Atkinson Hyperlegible Mono',monospace} .ds-sheet-margin b{display:block;font-size:18px;color:var(--ink-2,#3a433e)} .ds-sheet-margin small{display:block;font-size:12px} .ds-mark{display:block;margin:12px auto 0;width:22px;height:22px;fill:none;stroke:var(--ink-3,#56615b);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round} .ds-mark path{stroke-dasharray:1;animation:ds-draw 180ms cubic-bezier(0.23,1,0.32,1) both} @keyframes ds-draw{from{stroke-dashoffset:1}} .ds-sheet-body{padding:20px 24px 24px} .ds-sheet-body h2{margin:0;font-size:24px;font-weight:700;letter-spacing:-0.01em;line-height:1.2} .ds-sheet-body p{margin:16px 0 0;max-width:68ch;color:var(--ink-2,#3a433e);line-height:1.65}"
+    },
+    {
+      "name": "Practice Option with Margin Mark",
+      "kind": "custom",
+      "refersTo": "option-right",
+      "description": "An MCQ option on its ruled line; after checking, a tick or cross is drawn in the margin in 180ms.",
+      "html": "<div class=\"ds-opt-sheet\"><div class=\"ds-opt-row\"><svg class=\"ds-opt-mark\" viewBox=\"0 0 28 28\" aria-hidden=\"true\"><path pathLength=\"1\" d=\"M5 15.5 L11.5 22 L23.5 6.5\"/></svg><button class=\"ds-option\" data-state=\"right\"><span class=\"ds-key\">A</span>Plastids</button></div><div class=\"ds-opt-row\"><button class=\"ds-option\"><span class=\"ds-key\">B</span>Bound ribosomes</button></div></div>",
+      "css": ".ds-opt-sheet{display:grid;gap:8px;padding:16px 16px 16px 56px;border-left:1px solid var(--margin,#d27a70);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif} .ds-opt-row{position:relative} .ds-opt-mark{position:absolute;left:-42px;top:50%;width:28px;height:28px;transform:translateY(-50%);fill:none;stroke:var(--right,#1d6b43);stroke-width:3;stroke-linecap:round;stroke-linejoin:round} .ds-opt-mark path{stroke-dasharray:1;animation:ds-draw2 180ms cubic-bezier(0.23,1,0.32,1) both} @keyframes ds-draw2{from{stroke-dashoffset:1}} .ds-option{display:grid;grid-template-columns:32px 1fr;align-items:center;gap:12px;width:100%;min-height:52px;padding:8px 16px 8px 12px;border:1px solid var(--rule,#d3dce2);border-radius:6px;background:var(--page,#fbfcfa);color:var(--ink,#1f2522);font:inherit;text-align:left;cursor:pointer;transition:border-color 150ms ease,background-color 150ms ease} .ds-option:hover{border-color:var(--ink-3,#56615b)} .ds-option[aria-pressed=true]{border-color:var(--ink,#1f2522);background:var(--raise,#f3f6f2);box-shadow:inset 0 0 0 1px var(--ink,#1f2522)} .ds-option[data-state=right]{border-color:var(--right,#1d6b43);background:var(--right-soft,#e3f1e8)} .ds-option[data-state=wrong]{border-color:var(--wrong,#b3372c);background:var(--wrong-soft,#fbeae7)} .ds-option:focus-visible{outline:2px solid var(--focus,#1f2522);outline-offset:2px} .ds-key{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--rule-strong,#aebdc8);border-radius:4px;font-family:var(--font-mono),'Atkinson Hyperlegible Mono',monospace;font-size:14px;color:var(--ink-2,#3a433e)}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Find a lecture, slide or term on Home.",
+      "html": "<label class=\"ds-search\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input type=\"search\" placeholder=\"Find a lecture, slide or term\"></label>",
+      "css": ".ds-search{position:relative;display:block;max-width:360px} .ds-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-3,#56615b)} .ds-search input{width:100%;min-height:44px;padding:0 16px 0 40px;border:1px solid var(--rule-strong,#aebdc8);border-radius:6px;background:var(--page,#fbfcfa);color:var(--ink,#1f2522);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:16px;box-sizing:border-box} .ds-search input::placeholder{color:var(--ink-3,#56615b)} .ds-search input:focus-visible{outline:2px solid var(--focus,#1f2522);outline-offset:2px}"
+    },
+    {
+      "name": "Index Card (Recall)",
+      "kind": "card",
+      "refersTo": "flash-card",
+      "description": "Flip card with a heading line over a red rule; flips on Y in 320ms, instantly from the keyboard.",
+      "html": "<div class=\"ds-card\"><span class=\"ds-card-head\">Term</span><span class=\"ds-card-main\">Chloroplast</span><span class=\"ds-card-foot\">Think of what the slide says, then turn the card.</span></div>",
+      "css": ".ds-card{display:flex;flex-direction:column;min-height:300px;max-width:760px;background:var(--page,#fbfcfa);border:1px solid var(--rule-strong,#aebdc8);border-radius:10px;overflow:hidden;color:var(--ink,#1f2522);font-family:var(--font-sans),'Atkinson Hyperlegible Next',system-ui,sans-serif} .ds-card-head{padding:12px 20px;border-bottom:2px solid var(--margin,#d27a70);font-size:14px;color:var(--ink-3,#56615b)} .ds-card-main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;font-size:32px;font-weight:700;letter-spacing:-0.01em} .ds-card-foot{padding:12px 20px;border-top:1px solid var(--rule,#d3dce2);font-size:14px;color:var(--ink-3,#56615b)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Practical Notebook",
+    "overview": "**Creative North Star: \"The Practical Notebook\"**\n\nEvery lecture slide is a practical-copy spread. The explanation sits on the ruled page: cool practical paper with blue-grey hairline rules, a ruled margin column and a thin red margin line. The lecturer's figure sits on the plain white page beside it. Answers are marked in the margin, with a tick or cross drawn in pencil, green or red, like a teacher marking a lab copy. Everything else is graphite on paper on a pale desk. At night the same notebook sits on a dark lab bench in the same green family, and it is just as complete as the light theme.\n\nThe system is calm, dense where studying needs it, and flat. Hierarchy comes from weight, hairline rules and the margin column, not from colour or shadow. Colour is saved for meaning: forest green means \"go forward\" or \"correct\", red ink means \"correction\", and graphite covers everything else, including every current or selected state. One face family carries the whole app. Atkinson Hyperlegible Next is used for anything read, and its Mono sibling for slide numbers, counts and keys. Motion is CSS only, short, and removed under reduced motion.\n\nThe world rejects the LMS dashboard of cards and the cream-paper serif reader. It uses no decorative shadows, no pill shapes and no second accent colour.",
+    "keyCharacteristics": [
+      "Ruled sheet (explanation) beside the plain figure page (slide), sized to fit one laptop viewport.",
+      "A 56px margin column with a red margin line carries slide numbers, the pencil read-tick, drawn ticks and crosses, and tallies.",
+      "Graphite ink for all state; forest green only for the one forward action and correct marks; red ink only for corrections.",
+      "One type family: Atkinson Hyperlegible Next, with Hyperlegible Mono for numerals.",
+      "Flat paper surfaces with hairline borders and 6px corners (10px for sheets)."
+    ],
+    "rules": [
+      {
+        "name": "The One Green Action Rule",
+        "body": "Forest fill appears on exactly one control per screen: the forward action. If two green buttons are visible, one of them is wrong. The only other greens are the correct mark and the wordmark leaf.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Pen Rule",
+        "body": "Red marking ink means \"this was a miss\" and nothing else. It never decorates, never marks the current state, and never styles a heading. The red margin line is a separate, softer ruling.",
+        "section": "colors"
+      },
+      {
+        "name": "The Graphite State Rule",
+        "body": "Current and selected states (nav, stage tabs, semester, practice mode, session size, strip current, selected option) use graphite ink: an underline, outline or ring, plus a quiet fill. They never use green.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Atkinson Hyperlegible Next for words, Atkinson Hyperlegible Mono for numbers. There is no display face, no serif and no third family.",
+        "section": "typography"
+      },
+      {
+        "name": "The 12px Floor Rule",
+        "body": "No text is set below 0.75rem (12px), including captions, counts and keyboard hints.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Viewport Rule",
+        "body": "On a laptop, the slide, its explanation and the Next action must all be visible without scrolling the page. Any new chrome above the spread must be paid for by adjusting the 380px chrome allowance.",
+        "section": "layout"
+      },
+      {
+        "name": "The Paper-Flat Rule",
+        "body": "Pages lie on the desk. The only shadow is for the modal enlarged slide, which is lifted off the desk. Use borders, rules and tonal fills for everything else.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** give each screen exactly one forest-fill button, the forward action.",
+      "**Do** mark current and selected states in graphite: a 2px underline, a 2px outline or an inset ring, with the quiet fill.",
+      "**Do** put numbers, ticks, crosses and tallies in the 56px margin column of a ruled sheet, and set every number in Atkinson Hyperlegible Mono with tabular numerals.",
+      "**Do** keep the Read spread inside one laptop viewport. Adjust the 380px chrome allowance if chrome is added.",
+      "**Do** use 6px corners for controls, 4px for inner parts and 10px for sheets, with 1px blue-grey hairlines.",
+      "**Do** keep motion in CSS, under 320ms, ease-out `cubic-bezier(0.23, 1, 0.32, 1)`, and remove it under `prefers-reduced-motion`.",
+      "**Do** make every interactive target at least 44px at ≤760px, and keep text at 12px or larger.",
+      "**Do** ship light and dark together. Every token has a dark counterpart, and slide images stay on white."
+    ],
+    "donts": [
+      "**Don't** use green for current, selected, focus or hover states, or for links.",
+      "**Don't** use red marking ink for anything but a miss or a correction count.",
+      "**Don't** add shadows to pages, cards, buttons or hover states. The zoom dialog is the only lifted surface.",
+      "**Don't** use pill-shaped buttons, chips or badges.",
+      "**Don't** introduce a second typeface, a serif reader face, or cream paper.",
+      "**Don't** add an animation library or animate layout properties such as width or height. Use transform, opacity and stroke-dashoffset."
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "screens": {
+    "home-desktop-light": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "read-desktop-light": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "home-desktop-dark": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "read-desktop-dark": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "recall-desktop-light": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "home-mobile-light": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "read-mobile-light": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "practise-mobile-dark": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    },
+    "recall-mobile-dark": {
+      "overflowX": false,
+      "tiny": 0,
+      "tinySamples": [],
+      "small": 0,
+      "smallSamples": [],
+      "fonts": [
+        "\"Atkinson Hyperlegible Next\"",
+        "\"Atkinson Hyperlegible Mono\""
+      ]
+    }
+  },
+  "axe": {
+    "home-light": [],
+    "read-light": [],
+    "practise-light": [],
+    "home-dark": [],
+    "read-dark": [],
+    "practise-dark": [],
+    "recall-light": [],
+    "short-light": [],
+    "progress-light": [],
+    "sources-light": [],
+    "read-fall2025-light": [],
+    "home-mobile-light": [],
+    "practise-mobile-dark": []
+  }
+}

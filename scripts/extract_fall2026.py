@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
-"""Extract Fall 2026 (MBMD) lecture slides, text, and metadata."""
+"""Extract the Fall 2026 (MBMD) lecture decks exclusively from the supplied files.
 
+Requires Python 3 + Pillow, Poppler (pdfinfo, pdftoppm) and LibreOffice.
+Editable slide text is read from each deck's OOXML; the legacy .ppt deck is first
+converted to .pptx by LibreOffice. Visuals are rendered from LibreOffice's PDF export.
+Output: data/extracted/fall2026.json (no notes, flashcards or questions; see build_course.py).
+"""
+from __future__ import annotations
+
+import argparse
 import concurrent.futures
 import hashlib
 import json
@@ -11,297 +19,268 @@ import tempfile
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
 from PIL import Image
 
 APP = Path(__file__).resolve().parents[1]
-SOURCE_DIR = Path("/Users/tahsinulmohsin/NSU Fall 2026/BIO103 MBMD")
-PDF_DIR = Path("/Users/tahsinulmohsin/.gemini/antigravity/brain/139856a9-14b2-4e85-9f22-3a8b94f68dc1/work/mbmd_conversion")
+DEFAULT_SOURCE = APP.parents[3] / "BIO103 MBMD"
+PUBLIC_SOURCES = APP / "public" / "sources" / "fall2026"
+SLIDE_DIR = APP / "public" / "slides-mbmd"
+OCR_FILE = APP / "data" / "mbmd-ocr.jsonl"
+OUT_FILE = APP / "data" / "extracted" / "fall2026.json"
 
+# (id, file, title, lecture label, category, cover slide)
 MODULES = [
-    {
-        "id": "intro-biology",
-        "file": "Lec-1,2_Introduction to Biology+Life (3).pptx",
-        "pdf": "Lec-1,2_Introduction to Biology+Life (3).pdf",
-        "title": "Introduction to Biology & Life",
-        "lectureLabel": "Lectures 1–2",
-        "category": "Foundations",
-        "coverSlide": 1
-    },
-    {
-        "id": "classification",
-        "file": "L - 3 Classification of Living Things.pptx",
-        "pdf": "L - 3 Classification of Living Things.pdf",
-        "title": "Classification of Living Things",
-        "lectureLabel": "Lecture 3",
-        "category": "Foundations",
-        "coverSlide": 2
-    },
-    {
-        "id": "chemistry",
-        "file": "Lec-4,5_Chemistry of life.pptx",
-        "pdf": "Lec-4,5_Chemistry of life.pdf",
-        "title": "Chemistry of Life",
-        "lectureLabel": "Lectures 4–5",
-        "category": "Foundations",
-        "coverSlide": 2
-    },
-    {
-        "id": "macromolecules",
-        "file": "Lec-6,7_Biological macromolecules.pptx",
-        "pdf": "Lec-6,7_Biological macromolecules.pdf",
-        "title": "Biological Macromolecules",
-        "lectureLabel": "Lectures 6–7",
-        "category": "Foundations",
-        "coverSlide": 2
-    },
-    {
-        "id": "cells",
-        "file": "Lec-8,9_Cells.ppt",
-        "pdf": "Lec-8,9_Cells.pdf",
-        "title": "Cell Structure and Function",
-        "lectureLabel": "Lectures 8–9",
-        "category": "Cell & molecular biology",
-        "coverSlide": 2
-    },
-    {
-        "id": "central-dogma",
-        "file": "Lec-10_CDL.pptx",
-        "pdf": "Lec-10_CDL.pdf",
-        "title": "Central Dogma of Life",
-        "lectureLabel": "Lecture 10",
-        "category": "Cell & molecular biology",
-        "coverSlide": 2
-    },
-    {
-        "id": "energy",
-        "file": "Lec-11,12_Energy of Life.pptx",
-        "pdf": "Lec-11,12_Energy of Life.pdf",
-        "title": "Energy of Life",
-        "lectureLabel": "Lectures 11–12",
-        "category": "Cell & molecular biology",
-        "coverSlide": 2
-    },
-    {
-        "id": "cell-cycle",
-        "file": "Lec-13,14_Cell Cycle.pptx",
-        "pdf": "Lec-13,14_Cell Cycle.pdf",
-        "title": "Cell Cycle & Cellular Division",
-        "lectureLabel": "Lectures 13–14",
-        "category": "Cell & molecular biology",
-        "coverSlide": 2
-    },
-    {
-        "id": "homeostasis",
-        "file": "Lec-15_Homeostasis.pptx",
-        "pdf": "Lec-15_Homeostasis.pdf",
-        "title": "Homeostasis",
-        "lectureLabel": "Lecture 15",
-        "category": "Human systems",
-        "coverSlide": 2
-    },
-    {
-        "id": "digestion",
-        "file": "Lec-16_digestion.pptx",
-        "pdf": "Lec-16_digestion.pdf",
-        "title": "Digestive System",
-        "lectureLabel": "Lecture 16",
-        "category": "Human systems",
-        "coverSlide": 2
-    },
-    {
-        "id": "circulation",
-        "file": "Lec-17_Circulatory System.pptx",
-        "pdf": "Lec-17_Circulatory System.pdf",
-        "title": "Circulatory System",
-        "lectureLabel": "Lecture 17",
-        "category": "Human systems",
-        "coverSlide": 2
-    },
-    {
-        "id": "respiration-excretion",
-        "file": "Lec-18_Respiratory & Excretory System.pptx",
-        "pdf": "Lec-18_Respiratory & Excretory System.pdf",
-        "title": "Human Respiratory & Excretory System",
-        "lectureLabel": "Lecture 18",
-        "category": "Human systems",
-        "coverSlide": 2
-    },
-    {
-        "id": "diabetes-lipids",
-        "file": "Lec-19_Diabetes_LP.pptx",
-        "pdf": "Lec-19_Diabetes_LP.pdf",
-        "title": "Diabetes & Lipid Profile",
-        "lectureLabel": "Lecture 19",
-        "category": "Food & metabolism",
-        "coverSlide": 2
-    },
-    {
-        "id": "nutrition",
-        "file": "Lec-20_Food & Nutrition.pptx",
-        "pdf": "Lec-20_Food & Nutrition.pdf",
-        "title": "Food and Nutrition",
-        "lectureLabel": "Lecture 20",
-        "category": "Food & metabolism",
-        "coverSlide": 2
-    }
+    ("intro-biology", "Lec-1,2_Introduction to Biology+Life (3).pptx", "Introduction to Biology & Life", "Lectures 1–2", "Foundations", 1),
+    ("classification", "L - 3 Classification of Living Things.pptx", "Classification of Living Things", "Lecture 3", "Foundations", 2),
+    ("chemistry", "Lec-4,5_Chemistry of life.pptx", "Chemistry of Life", "Lectures 4–5", "Foundations", 2),
+    ("macromolecules", "Lec-6,7_Biological macromolecules.pptx", "Biological Macromolecules", "Lectures 6–7", "Foundations", 2),
+    ("cells", "Lec-8,9_Cells.ppt", "Cell Structure and Function", "Lectures 8–9", "Cell & molecular biology", 2),
+    ("central-dogma", "Lec-10_CDL.pptx", "Central Dogma of Life", "Lecture 10", "Cell & molecular biology", 2),
+    ("energy", "Lec-11,12_Energy of Life.pptx", "Energy of Life", "Lectures 11–12", "Cell & molecular biology", 2),
+    ("cell-cycle", "Lec-13,14_Cell Cycle.pptx", "Cell Cycle & Cellular Division", "Lectures 13–14", "Cell & molecular biology", 2),
+    ("homeostasis", "Lec-15_Homeostasis.pptx", "Homeostasis", "Lecture 15", "Human systems", 2),
+    ("digestion", "Lec-16_digestion.pptx", "Digestive System", "Lecture 16", "Human systems", 2),
+    ("circulation", "Lec-17_Circulatory System.pptx", "Circulatory System", "Lecture 17", "Human systems", 2),
+    ("respiration-excretion", "Lec-18_Respiratory & Excretory System.pptx", "Human Respiratory & Excretory System", "Lecture 18", "Human systems", 2),
+    ("diabetes-lipids", "Lec-19_Diabetes_LP.pptx", "Diabetes & Lipid Profile", "Lecture 19", "Food & metabolism", 2),
+    ("nutrition", "Lec-20_Food & Nutrition.pptx", "Food and Nutrition", "Lecture 20", "Food & metabolism", 2),
 ]
 
+NS = {
+    "a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+    "p": "http://schemas.openxmlformats.org/presentationml/2006/main",
+    "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+}
+SKIPPED_PLACEHOLDERS = {"sldNum", "dt", "ftr", "hdr"}
+TITLE_PLACEHOLDERS = {"title", "ctrTitle"}
 
-def split_pages(text):
-    pages = text.split("\f")
-    if pages and not pages[-1].strip():
-        pages.pop()
-    return pages
+
+def find_soffice() -> str:
+    for candidate in (shutil.which("soffice"), "/Applications/LibreOffice.app/Contents/MacOS/soffice"):
+        if candidate and Path(candidate).exists():
+            return candidate
+    raise FileNotFoundError("LibreOffice (soffice) is required to convert the decks")
 
 
-def get_pptx_text(path):
-    ns = {
-        "a": "http://schemas.openxmlformats.org/drawingml/2006/main",
-        "p": "http://schemas.openxmlformats.org/presentationml/2006/main",
-        "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-    }
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def converted(original: Path, cache: Path, fmt: str, soffice: str) -> Path:
+    """Convert with LibreOffice, reusing a cached result only for the same source bytes."""
+    ext = fmt.split(":")[0]
+    out = cache / f"{original.stem}.{ext}"
+    marker = cache / f"{original.stem}.{ext}.source-sha256"
+    digest = sha256(original)
+    if out.exists() and marker.exists() and marker.read_text().strip() == digest:
+        return out
+    subprocess.run([soffice, "--headless", "--convert-to", fmt, "--outdir", str(cache), str(original)],
+                   check=True, capture_output=True, text=True)
+    if not out.exists():
+        raise RuntimeError(f"LibreOffice produced no {ext} for {original.name}")
+    marker.write_text(digest)
+    return out
+
+
+def paragraph_text(p: ET.Element) -> str:
+    parts = []
+    for node in p.iter():
+        tag = node.tag.split("}")[1]
+        if tag == "t":
+            parts.append(node.text or "")
+        elif tag == "br":
+            parts.append("\n")
+    return "".join(parts)
+
+
+def paragraph_level(p: ET.Element) -> int:
+    ppr = p.find("a:pPr", NS)
+    return int(ppr.attrib.get("lvl", "0")) if ppr is not None else 0
+
+
+def walk_shapes(tree: ET.Element, title: list[str], paragraphs: list[str], levels: list[int],
+                tables: list[list[list[str]]]) -> None:
+    """Visit shapes in document (z-)order, descending into groups."""
+    for node in tree:
+        tag = node.tag.split("}")[1]
+        if tag == "grpSp":
+            walk_shapes(node, title, paragraphs, levels, tables)
+        elif tag == "sp":
+            ph = node.find("p:nvSpPr/p:nvPr/p:ph", NS)
+            kind = ph.attrib.get("type", "body") if ph is not None else "shape"
+            if kind in SKIPPED_PLACEHOLDERS:
+                continue
+            found = [(paragraph_text(p), paragraph_level(p)) for p in node.findall("p:txBody/a:p", NS)]
+            found = [(t, lvl) for t, lvl in found if t.strip()]
+            if kind in TITLE_PLACEHOLDERS and not title:
+                title.append(" ".join(t.strip() for t, _ in found))
+            else:
+                paragraphs.extend(t for t, _ in found)
+                levels.extend(lvl for _, lvl in found)
+        elif tag == "graphicFrame":
+            for tbl in node.iter(f"{{{NS['a']}}}tbl"):
+                rows = []
+                for tr in tbl.findall("a:tr", NS):
+                    cells = [" ".join(paragraph_text(p).strip() for p in tc.findall("a:txBody/a:p", NS)).strip()
+                             for tc in tr.findall("a:tc", NS)]
+                    if any(cells):
+                        rows.append(cells)
+                if rows:
+                    tables.append(rows)
+
+
+def pptx_slides(path: Path) -> list[dict]:
     with zipfile.ZipFile(path) as archive:
         rels = {r.attrib["Id"]: r.attrib["Target"] for r in ET.fromstring(archive.read("ppt/_rels/presentation.xml.rels"))}
         pres = ET.fromstring(archive.read("ppt/presentation.xml"))
         result = []
-        sld_id_lst = pres.find("p:sldIdLst", ns)
-        if sld_id_lst is not None:
-            for sid in sld_id_lst:
-                target = rels[sid.attrib["{" + ns["r"] + "}id"]]
-                part = "ppt/" + target.lstrip("/") if not target.startswith("/") else target.lstrip("/")
-                root = ET.fromstring(archive.read(part))
-                texts = ["".join(t.text or "" for t in p.findall(".//a:t", ns)) for p in root.findall(".//a:p", ns)]
-                result.append("\n".join(texts))
+        for sid in pres.find("p:sldIdLst", NS):
+            target = rels[sid.attrib[f"{{{NS['r']}}}id"]]
+            part = target.lstrip("/") if target.startswith("/") else "ppt/" + target
+            root = ET.fromstring(archive.read(part))
+            title: list[str] = []
+            paragraphs: list[str] = []
+            levels: list[int] = []
+            tables: list[list[list[str]]] = []
+            walk_shapes(root.find("p:cSld/p:spTree", NS), title, paragraphs, levels, tables)
+            result.append({"title": title[0] if title else "", "paragraphs": paragraphs, "levels": levels, "tables": tables,
+                           "hidden": root.attrib.get("show") == "0"})
         return result
 
 
-def title_for(text, page):
-    lines = [x.strip() for x in text.splitlines() if x.strip()]
-    lines = [x for x in lines if not re.fullmatch(r"\d{1,3}", x)]
-    if not lines:
-        return f"Slide {page}"
-    first = lines[0]
-    return first if len(first) <= 100 else f"Slide {page}"
+def raw_text(slide: dict) -> str:
+    lines = ([slide["title"]] if slide["title"] else []) + slide["paragraphs"]
+    for table in slide["tables"]:
+        lines.extend("\t".join(row) for row in table)
+    return "\n".join(lines)
 
 
-def render_and_extract(mod_info):
-    mod_id = mod_info["id"]
-    pdf_path = PDF_DIR / mod_info["pdf"]
-    original_path = SOURCE_DIR / mod_info["file"]
-    
-    assert pdf_path.exists(), f"PDF not found: {pdf_path}"
-    assert original_path.exists(), f"Original not found: {original_path}"
-    
-    # Get slide count
-    info = subprocess.check_output(["pdfinfo", str(pdf_path)]).decode()
-    count = int(re.search(r"^Pages:\s+(\d+)", info, re.M).group(1))
-    
-    # Extract text
-    if original_path.suffix.lower() == ".pptx":
-        try:
-            pages = get_pptx_text(original_path)
-            if len(pages) != count:
-                # Fallback to pdf text if OOXML count differs
-                pages = split_pages(subprocess.check_output(["pdftotext", str(pdf_path), "-"]).decode())
-        except Exception:
-            pages = split_pages(subprocess.check_output(["pdftotext", str(pdf_path), "-"]).decode())
-    else:
-        pages = split_pages(subprocess.check_output(["pdftotext", str(pdf_path), "-"]).decode())
-        
-    layout_pages = split_pages(subprocess.check_output(["pdftotext", "-layout", str(pdf_path), "-"]).decode())
-    
-    # Ensure page counts match
-    while len(pages) < count:
-        pages.append("")
-    while len(layout_pages) < count:
-        layout_pages.append("")
-        
-    pages = pages[:count]
-    layout_pages = layout_pages[:count]
-    
-    # Render images
-    image_dir = APP / "public" / "slides-mbmd" / mod_id
+def load_ocr() -> dict[str, dict]:
+    records = {}
+    if OCR_FILE.exists():
+        for line in OCR_FILE.read_text().splitlines():
+            if line.strip():
+                entry = json.loads(line)
+                p = Path(entry["path"])
+                records[f"{p.parent.name}/{p.name}"] = entry
+    return records
+
+
+def extract_one(item, source_dir: Path, cache: Path, soffice: str, rerender: bool, ocr: dict) -> dict:
+    module_id, filename, title, lecture, category, cover = item
+    original = source_dir / filename
+    if not original.is_file():
+        raise FileNotFoundError(original)
+    # Published under the topic id: names like "Biology+Life (3)" break static URL matching.
+    PUBLIC_SOURCES.mkdir(parents=True, exist_ok=True)
+    published = PUBLIC_SOURCES / f"{module_id}{original.suffix.lower()}"
+    preview = PUBLIC_SOURCES / f"{module_id}.pdf"
+    shutil.copy2(original, published)
+    pdf = converted(original, cache, 'pdf:impress_pdf_Export:{"ExportHiddenSlides":{"type":"boolean","value":"true"}}', soffice)
+    shutil.copy2(pdf, preview)
+    ooxml = original if original.suffix.lower() == ".pptx" else converted(original, cache, "pptx", soffice)
+
+    count = int(re.search(r"^Pages:\s+(\d+)", subprocess.check_output(["pdfinfo", str(pdf)], text=True), re.M).group(1))
+    decks = pptx_slides(ooxml)
+    if len(decks) != count:
+        raise AssertionError(f"{filename}: {len(decks)} OOXML slides but {count} PDF pages")
+
+    image_dir = SLIDE_DIR / module_id
     image_dir.mkdir(parents=True, exist_ok=True)
-    
-    existing_images = list(image_dir.glob("*.webp"))
-    if len(existing_images) != count:
-        with tempfile.TemporaryDirectory(prefix=mod_id + "-") as tmp_dir:
-            prefix = Path(tmp_dir) / "page"
-            subprocess.run(["pdftoppm", "-jpeg", "-r", "150", "-scale-to", "1800", str(pdf_path), str(prefix)], check=True)
-            for img in sorted(Path(tmp_dir).glob("page-*.jpg")):
-                num = int(img.stem.split("-")[-1])
+    rendered = False
+    if rerender or len(list(image_dir.glob("*.webp"))) != count:
+        for old in image_dir.glob("*.webp"):
+            old.unlink()
+        with tempfile.TemporaryDirectory(prefix=module_id + "-") as tmp:
+            subprocess.run(["pdftoppm", "-jpeg", "-r", "150", "-scale-to", "1800", str(pdf), str(Path(tmp) / "page")], check=True)
+            for img in sorted(Path(tmp).glob("page-*.jpg")):
                 with Image.open(img) as frame:
-                    frame.save(image_dir / f"{num:03d}.webp", "WEBP", quality=86, method=4)
-                    
+                    frame.save(image_dir / f"{int(img.stem.split('-')[-1]):03d}.webp", "WEBP", quality=86, method=5)
+        rendered = True
+
     slides = []
-    for idx, raw in enumerate(pages):
-        num = idx + 1
-        img_path = image_dir / f"{num:03d}.webp"
-        with Image.open(img_path) as frame:
-            w, h = frame.size
-            
-        paragraphs = [p.strip() for p in re.split(r"\n\s*\n", raw) if p.strip() and not re.fullmatch(r"\d{1,3}", p.strip())]
-        t = title_for(layout_pages[idx] if idx < len(layout_pages) else raw, num)
-        
-        slides.append({
-            "id": f"{mod_id}-{num:03d}",
-            "number": num,
-            "title": t,
-            "rawText": raw.strip(),
-            "paragraphs": paragraphs,
-            "image": f"/slides-mbmd/{mod_id}/{num:03d}.webp",
-            "width": w,
-            "height": h,
+    for number, deck in enumerate(decks, 1):
+        image = image_dir / f"{number:03d}.webp"
+        with Image.open(image) as frame:
+            width, height = frame.size
+        slide = {
+            "id": f"{module_id}-{number:03d}",
+            "number": number,
+            "sourceTitle": deck["title"],
+            "rawText": raw_text(deck),
+            "sourceParagraphs": deck["paragraphs"],
+            "sourceLevels": deck["levels"],
+            "tables": deck["tables"],
+            "image": f"/slides-mbmd/{module_id}/{number:03d}.webp",
+            "width": width,
+            "height": height,
             "isReferenceOnly": False,
-            "textExtraction": "pptx-ooxml" if original_path.suffix.lower() == ".pptx" else "pdf-text-layer",
-            "imageSha256": hashlib.sha256(img_path.read_bytes()).hexdigest(),
-        })
-        
-    cover_slide = mod_info["coverSlide"]
-    cover_path = f"/slides-mbmd/{mod_id}/{cover_slide:03d}.webp"
-    
-    print(f"Extracted {mod_info['title']}: {count} slides", flush=True)
-    
+            "hiddenInDeck": deck["hidden"],
+            "textExtraction": "pptx-ooxml" if original.suffix.lower() == ".pptx" else "ppt→pptx-ooxml (LibreOffice)",
+            "imageSha256": sha256(image),
+        }
+        record = None if rendered else ocr.get(f"{module_id}/{number:03d}.webp")
+        if record and not record.get("error"):
+            slide["ocrText"] = record["text"]
+            slide["ocrBlockCount"] = len(record["blocks"])
+        slides.append(slide)
+
+    print(f"Extracted {filename}: {count} slides", flush=True)
     return {
-        "id": mod_id,
-        "title": mod_info["title"],
-        "lectureLabel": mod_info["lectureLabel"],
-        "category": mod_info["category"],
-        "instructor": "Prof. Dr. Md. Mahbubul Morshed (MBMD)",
-        "term": "Fall 2026",
-        "description": " · ".join(dict.fromkeys(s["title"] for s in slides[1:4])),
-        "cover": cover_path,
+        "id": module_id,
+        "title": title,
+        "lectureLabel": lecture,
+        "category": category,
         "source": {
-            "file": mod_info["file"],
-            "url": f"/sources/{mod_info['file']}",
-            "kind": Path(mod_info["file"]).suffix.lstrip("."),
-            "pageCount": count
+            "file": filename,
+            "url": "/sources/fall2026/" + published.name,
+            "previewUrl": "/sources/fall2026/" + preview.name,
+            "sha256": sha256(original),
+            "previewSha256": sha256(preview),
+            "kind": original.suffix.lstrip(".").lower(),
+            "pageCount": count,
         },
+        "cover": f"/slides-mbmd/{module_id}/{cover:03d}.webp",
         "slides": slides,
-        "flashcards": [],
-        "quiz": []
     }
 
 
-def main():
-    print("Starting extraction of Fall 2026 MBMD course slides...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        futures = [executor.submit(render_and_extract, m) for m in MODULES]
-        modules = [f.result() for f in futures]
-        
-    # Maintain original order
-    order_map = {m["id"]: i for i, m in enumerate(MODULES)}
-    modules.sort(key=lambda m: order_map[m["id"]])
-    
-    for idx, m in enumerate(modules, 1):
-        m["number"] = idx
-        
-    out_file = APP / "data" / "course-mbmd-raw.json"
-    out_file.write_text(json.dumps(modules, ensure_ascii=False, indent=2))
-    
-    total_slides = sum(len(m["slides"]) for m in modules)
-    print(f"Successfully processed {len(modules)} modules with {total_slides} slides total!")
-    print(f"Saved to {out_file}")
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source-dir", type=Path, default=DEFAULT_SOURCE)
+    parser.add_argument("--cache-dir", type=Path, default=APP / ".cache" / "fall2026")
+    parser.add_argument("--rerender", action="store_true", help="Re-render every slide visual (drops OCR until re-run)")
+    args = parser.parse_args()
+    args.cache_dir.mkdir(parents=True, exist_ok=True)
+    soffice = find_soffice()
+    ocr = load_ocr()
+    # LibreOffice cannot run several conversions against one profile at once, so convert serially first.
+    for item in MODULES:
+        original = args.source_dir / item[1]
+        converted(original, args.cache_dir, 'pdf:impress_pdf_Export:{"ExportHiddenSlides":{"type":"boolean","value":"true"}}', soffice)
+        if original.suffix.lower() != ".pptx":
+            converted(original, args.cache_dir, "pptx", soffice)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        modules = list(pool.map(lambda item: extract_one(item, args.source_dir, args.cache_dir, soffice, args.rerender, ocr), MODULES))
+    for number, module in enumerate(modules, 1):
+        module["number"] = number
+    course = {
+        "semester": "fall2026",
+        "term": "Fall 2026",
+        "instructor": "Prof. Dr. Md. Mahbubul Morshed (MBMD)",
+        "institution": "North South University",
+        "modules": modules,
+        "references": [],
+        "stats": {
+            "moduleCount": len(modules),
+            "slideCount": sum(len(m["slides"]) for m in modules),
+            "ocrPageCount": sum(1 for m in modules for s in m["slides"] if "ocrText" in s),
+        },
+    }
+    OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    OUT_FILE.write_text(json.dumps(course, ensure_ascii=False, indent=2))
+    print(json.dumps(course["stats"]))
 
 
 if __name__ == "__main__":

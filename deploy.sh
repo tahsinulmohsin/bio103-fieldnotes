@@ -19,6 +19,8 @@ ssh -o BatchMode=yes -o ConnectTimeout=5 -i "$SSH_KEY" "${REMOTE_USER}@${REMOTE_
 echo "==> [2/4] Syncing project files to ${REMOTE_HOST}:${REMOTE_DIR} via rsync..."
 rsync -avz --delete \
   --exclude "node_modules" \
+  --exclude ".cache" \
+  --exclude "__pycache__" \
   --exclude ".next" \
   --exclude ".git" \
   --exclude "scratch" \
@@ -27,12 +29,13 @@ rsync -avz --delete \
   --exclude "playwright-report" \
   --exclude "test-results" \
   --exclude ".vercel" \
+  --exclude ".impeccable/review" \
   -e "ssh -i $SSH_KEY" \
   "$SCRIPT_DIR/" "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/"
 
 echo "==> [3/4] Building and launching Docker container on remote host..."
 ssh -o BatchMode=yes -o ConnectTimeout=10 -i "$SSH_KEY" "${REMOTE_USER}@${REMOTE_HOST}" \
-  "cd '${REMOTE_DIR}' && docker compose down || true && docker compose up -d --build"
+  "cd '${REMOTE_DIR}' && (docker image tag bio103-fieldnotes:latest bio103-fieldnotes:previous 2>/dev/null || true) && docker compose build && docker compose up -d"
 
 echo "==> [4/4] Verifying healthcheck at http://${REMOTE_HOST}:${PORT}/api/health..."
 MAX_ATTEMPTS=45
