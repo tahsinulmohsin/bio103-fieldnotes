@@ -76,7 +76,7 @@ def main():
 
     args.backup_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     os.chmod(args.backup_dir, 0o700)
-    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     backup = args.backup_dir / ("cloudflare-before-" + stamp + ".json")
     descriptor = os.open(backup, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
     with os.fdopen(descriptor, "w") as output:

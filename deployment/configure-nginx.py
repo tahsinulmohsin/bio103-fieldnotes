@@ -17,6 +17,8 @@ import urllib.request
 
 NPM = "nginxproxymanager"
 HOSTNAME = "fieldnotes.tahsinulmohsin.me"  # must match server_name in nginx-bio103.conf
+APP = "bio103-fieldnotes-app"  # container_name in compose.yaml
+ALIAS = "bio103-fieldnotes"  # upstream host in nginx-bio103.conf, set by deployment/compose.proxy.yaml
 NETWORK = "bio103-ingress"
 CASA_DIR = "/var/lib/casaos/apps/nginxproxymanager"
 HTTP_CONFIG = "/data/nginx/custom/http.conf"
@@ -91,14 +93,26 @@ def main():
         updated_http = updated_http.rstrip() + "\n" + INCLUDE + "\n"
     npm_state = json.loads(run(["docker", "inspect", NPM]))[0]
     already_connected = NETWORK in npm_state["NetworkSettings"]["Networks"]
-    print(json.dumps({"nginxHost": HOSTNAME, "network": NETWORK, "connectNetwork": not already_connected, "persistCasaOsNetwork": original_casa != updated_casa, "existingProxyHostsEdited": False, "apply": args.apply}, indent=2))
+    try:
+        app_state = json.loads(run(["docker", "inspect", APP]))[0]
+    except RuntimeError:
+        raise RuntimeError(f"Container {APP} not found; deploy the app first") from None
+    app_network = app_state["NetworkSettings"]["Networks"].get(NETWORK) or {}
+    app_on_network = ALIAS in set(app_network.get("Aliases") or []) | set(app_network.get("DNSNames") or [])
+    app_healthy = app_state["State"].get("Health", {}).get("Status") == "healthy"
+    print(json.dumps({"nginxHost": HOSTNAME, "network": NETWORK, "appOnNetwork": app_on_network, "appHealthy": app_healthy, "connectNetwork": not already_connected, "persistCasaOsNetwork": original_casa != updated_casa, "existingProxyHostsEdited": False, "apply": args.apply}, indent=2))
+    if not app_on_network:
+        message = f"{APP} is not on {NETWORK} as {ALIAS}; deploy with DEPLOY_PROXY_NETWORK=1 (deployment/compose.proxy.yaml) first"
+        if not args.apply:
+            print("Before --apply: " + message)
+            return
+        raise RuntimeError(message)
     if not args.apply:
         return
-    app_state = json.loads(run(["docker", "inspect", "bio103-fieldnotes"]))[0]
-    if app_state["State"].get("Health", {}).get("Status") != "healthy":
+    if not app_healthy:
         raise RuntimeError("BIO103 container must be healthy before routing it")
     os.umask(0o077)
-    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     backup = base / "private" / ("nginx-before-" + stamp)
     backup.mkdir(parents=True, mode=0o700)
     (backup / "casaos-compose.yaml").write_text(original_casa)

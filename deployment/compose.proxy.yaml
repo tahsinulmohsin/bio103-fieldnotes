@@ -1,0 +1,17 @@
+# Joins the app to the shared bio103-ingress network under the alias bio103-fieldnotes,
+# the upstream in nginx-bio103.conf, so Nginx Proxy Manager can reach it.
+# Use it together with compose.yaml (deploy.sh does this when DEPLOY_PROXY_NETWORK=1):
+#   docker network inspect bio103-ingress >/dev/null 2>&1 || docker network create bio103-ingress
+#   COMPOSE_FILE=compose.yaml:deployment/compose.proxy.yaml docker compose up -d --wait
+services:
+  bio103:
+    networks:
+      default: {}
+      ingress:
+        aliases:
+          - bio103-fieldnotes
+
+networks:
+  ingress:
+    name: bio103-ingress
+    external: true

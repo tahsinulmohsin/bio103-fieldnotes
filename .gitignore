@@ -23,3 +23,6 @@ scripts/ocr-source
 
 # local deployment settings (server address)
 .deploy.env
+
+# proxy-script backups made on the server
+deployment/private/

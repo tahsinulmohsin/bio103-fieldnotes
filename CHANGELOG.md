@@ -11,6 +11,13 @@ All notable changes to BIO103 Fieldnotes. Versions follow [Semantic Versioning](
 - `deploy.sh` reads the server settings from an untracked `.deploy.env` (see `.deploy.env.example`) and prints the deployed version.
 - The deployment notes and reverse-proxy configuration target https://fieldnotes.tahsinulmohsin.me. The proxy scripts take the tunnel ID and origin as arguments.
 
+### Fixed
+- The Nginx Proxy Manager route now reaches the app:
+  - `deployment/compose.proxy.yaml` joins the app to the `bio103-ingress` network as `bio103-fieldnotes`; `deploy.sh` uses it when `DEPLOY_PROXY_NETWORK=1`.
+  - `configure-nginx.py` checks the real container (`bio103-fieldnotes-app`) and that network before changing anything.
+- The proxy scripts' backups in `deployment/private/` are no longer deleted by the next `deploy.sh`.
+- Backups from two proxy-script runs in the same second no longer collide.
+
 ## [2.0.0] - 2026-09-26
 
 A rebuild of the study flow, the content pipeline and the interface, live at https://fieldnotes.tahsinulmohsin.me.

@@ -17,6 +17,15 @@ SSH_KEY="${DEPLOY_SSH_KEY:-$HOME/.ssh/id_ed25519}"
 PORT="${DEPLOY_PORT:-3103}"
 PUBLIC_URL="${PUBLIC_URL:-https://fieldnotes.tahsinulmohsin.me}"
 
+# DEPLOY_PROXY_NETWORK=1 also joins the app to the shared bio103-ingress network, which the
+# Nginx Proxy Manager route in deployment/ uses to reach it (see deployment/README.md).
+COMPOSE_FILES="compose.yaml"
+PREPARE=""
+if [ "${DEPLOY_PROXY_NETWORK:-0}" = "1" ]; then
+  COMPOSE_FILES="compose.yaml:deployment/compose.proxy.yaml"
+  PREPARE="(docker network inspect bio103-ingress >/dev/null 2>&1 || docker network create bio103-ingress >/dev/null) && "
+fi
+
 echo "=========================================================="
 echo "   BIO103 Fieldnotes: production deployment via SSH"
 echo "=========================================================="
@@ -32,6 +41,7 @@ rsync -avz --delete \
   --exclude ".next" \
   --exclude ".git" \
   --exclude ".deploy.env" \
+  --exclude "deployment/private" \
   --exclude "scratch" \
   --exclude "*.log" \
   --exclude ".DS_Store" \
@@ -44,7 +54,7 @@ rsync -avz --delete \
 
 echo "==> [3/4] Building and launching the Docker container on the server..."
 ssh -o BatchMode=yes -o ConnectTimeout=10 -i "$SSH_KEY" "${REMOTE_USER}@${REMOTE_HOST}" \
-  "cd '${REMOTE_DIR}' && (docker image tag bio103-fieldnotes:latest bio103-fieldnotes:previous 2>/dev/null || true) && docker compose build && docker compose up -d"
+  "cd '${REMOTE_DIR}' && export COMPOSE_FILE='${COMPOSE_FILES}' && ${PREPARE}(docker image tag bio103-fieldnotes:latest bio103-fieldnotes:previous 2>/dev/null || true) && docker compose build && docker compose up -d"
 
 echo "==> [4/4] Verifying healthcheck at http://${REMOTE_HOST}:${PORT}/api/health..."
 MAX_ATTEMPTS=45
@@ -65,7 +75,7 @@ done
 if [ "$HEALTHY" = false ]; then
   echo "❌ ERROR: Container failed to respond with HTTP 200 within timeout."
   echo "==> Recent container logs:"
-  ssh -i "$SSH_KEY" "${REMOTE_USER}@${REMOTE_HOST}" "cd '${REMOTE_DIR}' && docker compose logs --tail=40"
+  ssh -i "$SSH_KEY" "${REMOTE_USER}@${REMOTE_HOST}" "cd '${REMOTE_DIR}' && COMPOSE_FILE='${COMPOSE_FILES}' docker compose logs --tail=40"
   exit 1
 fi
 

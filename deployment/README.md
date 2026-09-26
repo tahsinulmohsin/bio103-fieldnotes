@@ -23,14 +23,14 @@ No server address, Cloudflare token, tunnel ID, private key or account credentia
 
 ## Deploy from your computer
 
-Copy `.deploy.env.example` to `.deploy.env` and set `DEPLOY_HOST` and `DEPLOY_USER`. You can also set `DEPLOY_DIR`, `DEPLOY_SSH_KEY`, `DEPLOY_PORT` and `PUBLIC_URL`. Then run:
+Copy `.deploy.env.example` to `.deploy.env` and set `DEPLOY_HOST` and `DEPLOY_USER`. You can also set `DEPLOY_DIR`, `DEPLOY_SSH_KEY`, `DEPLOY_PORT`, `PUBLIC_URL`, and `DEPLOY_PROXY_NETWORK=1` for the proxy route below. Then run:
 
 ```sh
 ./deploy.sh
 ```
 
 It does five things:
-1. Rsyncs the project to the server, skipping `node_modules`, `.next`, `.git`, caches and `.deploy.env`.
+1. Rsyncs the project to the server, skipping `node_modules`, `.next`, `.git`, caches, `.deploy.env` and the proxy scripts' backups in `deployment/private/`.
 2. Tags the running image `bio103-fieldnotes:previous`.
 3. Builds the new image while the old container keeps serving.
 4. Recreates the container.
@@ -50,15 +50,24 @@ Keep `output: 'standalone'` in the Next.js configuration (it is set whenever the
 
 ## Optional: Nginx Proxy Manager and a Cloudflare Tunnel
 
-`deployment/` has scripts that route a hostname to the app: Cloudflare Tunnel → Nginx Proxy Manager → container. Both scripts dry-run by default, keep restricted backups under `deployment/private/` on the server, and never print credentials.
+`deployment/` has scripts that route the hostname through a Cloudflare Tunnel to Nginx Proxy Manager, then to the app over a shared Docker network. They are only needed if you run that route; the site works without them.
 
-> **Before applying:** these scripts were written for an earlier route and have not been run against the current `compose.yaml`. Two things need fixing first:
-> - `nginx-bio103.conf` forwards to `bio103-fieldnotes:3000` on the `bio103-ingress` network, but Compose does not attach the app to that network. Attach it with that alias.
-> - `configure-nginx.py` inspects a container named `bio103-fieldnotes`, but Compose names it `bio103-fieldnotes-app`.
->
-> The live hostname does not depend on these scripts.
+The route uses these pieces:
+- `compose.proxy.yaml`: a Compose override. It joins the app to the external `bio103-ingress` network under the alias `bio103-fieldnotes`.
+- `nginx-bio103.conf`: an Nginx server for `fieldnotes.tahsinulmohsin.me` that proxies to `bio103-fieldnotes:3000` on that network.
+- `configure-nginx.py`: installs that server in Nginx Proxy Manager.
+- `configure-cloudflare.py`: adds the hostname to the tunnel.
 
-Run them on the server from the project directory:
+**1. Put the app on the shared network.** Set `DEPLOY_PROXY_NETWORK=1` in `.deploy.env` and run `./deploy.sh`. It creates `bio103-ingress` if needed and deploys with the override. By hand on the server:
+
+```sh
+docker network inspect bio103-ingress >/dev/null 2>&1 || docker network create bio103-ingress
+COMPOSE_FILE=compose.yaml:deployment/compose.proxy.yaml docker compose up -d --wait
+```
+
+Keep the override for every later deploy and rollback, or the app leaves the network and the route stops working.
+
+**2. Dry-run, then apply**, on the server from the project directory:
 
 ```sh
 python3 deployment/configure-nginx.py
@@ -67,17 +76,20 @@ python3 deployment/configure-nginx.py --apply
 python3 deployment/configure-cloudflare.py --tunnel-id <tunnel-id> --origin http://<server>:80 --apply
 ```
 
-**`configure-nginx.py`**
-- Installs `nginx-bio103.conf` (server name `fieldnotes.tahsinulmohsin.me`) through Nginx Proxy Manager's [custom HTTP configuration include](https://nginxproxymanager.com/advanced-config/#custom-nginx-configurations).
-- Validates with `nginx -t`, then reloads gracefully.
-- Leaves the NPM database and other hosts untouched.
-- Connects NPM to the `bio103-ingress` Docker network and records that network in NPM's Compose file, so a recreated NPM keeps access to the app.
+Both scripts dry-run by default, never print credentials, and keep private backups in `deployment/private/`. `deploy.sh` leaves that folder alone on the server.
 
-**`configure-cloudflare.py`**
-- Adds only this hostname to the existing tunnel (`--hostname`, default `fieldnotes.tahsinulmohsin.me`) and its proxied CNAME.
-- Keeps the catch-all `http_status:404` rule last and leaves unrelated rules alone.
-- Only works inside the zone of the cloudflared certificate (`~/.cloudflared/cert.pem`, or `--certificate`).
-- Refuses to replace a hostname that already routes somewhere else, so it is safe to run against the live hostname.
+**What `configure-nginx.py` does:**
+- Checks that `bio103-fieldnotes-app` is healthy and on `bio103-ingress` as `bio103-fieldnotes`. It stops if not, and the dry-run says what is missing.
+- Installs `nginx-bio103.conf` through Nginx Proxy Manager's [custom HTTP configuration include](https://nginxproxymanager.com/advanced-config/#custom-nginx-configurations).
+- Connects NPM to `bio103-ingress`, validates with `nginx -t`, reloads, and checks `/api/health` through NPM.
+- Only then records the network in NPM's Compose file, so a recreated NPM keeps the route. The NPM database and other hosts are not touched.
+- If any step fails, it restores the previous configuration.
+
+**What `configure-cloudflare.py` does:**
+- Adds only this hostname (`--hostname`, default `fieldnotes.tahsinulmohsin.me`) to the tunnel, just before the catch-all `http_status:404` rule, and creates its proxied CNAME to `<tunnel-id>.cfargotunnel.com`.
+- Leaves unrelated rules alone and only works inside the zone of the cloudflared certificate (`~/.cloudflared/cert.pem`, or `--certificate`).
+- Refuses to replace a hostname that already routes somewhere else or has a different DNS record, so running it against a hostname that already works changes nothing.
+- If the DNS step fails, it removes the route it added.
 
 Behind a tunnel, check `X-Forwarded-Proto` for the HTTP → HTTPS redirect, as `nginx-bio103.conf` does. A blanket origin redirect can loop.
 
@@ -99,6 +111,8 @@ Open the site and walk through Read → Recall → Practise. Restarting the cont
 ```sh
 BIO103_IMAGE_TAG=previous docker compose up -d --wait
 ```
+
+If the app is on the proxy network, include the override: `COMPOSE_FILE=compose.yaml:deployment/compose.proxy.yaml BIO103_IMAGE_TAG=previous docker compose up -d --wait`.
 
 To remove the deployment, stop only this Compose project, remove only its proxy route and tunnel hostname, and delete only its DNS record. Never prune all containers, networks, images or Cloudflare routes.
 
