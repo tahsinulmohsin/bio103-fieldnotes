@@ -2,6 +2,7 @@
   "name": "bio103-fieldnotes",
   "version": "2.0.0",
   "description": "Study app for NSU BIO103: every lecture slide with an explanation, recall cards and exam-style practice.",
+  "license": "MIT",
   "private": true,
   "engines": {
     "node": ">=20.9"

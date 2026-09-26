@@ -2,25 +2,22 @@
 
 [![Version](https://img.shields.io/badge/version-2.0.0-1f5a3d)](CHANGELOG.md)
 [![CI](https://github.com/tahsinulmohsin/bio103-fieldnotes/actions/workflows/ci.yml/badge.svg)](https://github.com/tahsinulmohsin/bio103-fieldnotes/actions/workflows/ci.yml)
-[![Production](https://img.shields.io/badge/production-live%20on%20homelab-2e7d32)](#production-status)
+[![Production](https://img.shields.io/website?url=https%3A%2F%2Ffieldnotes.tahsinulmohsin.me%2Fapi%2Fhealth&label=production&up_message=online&down_message=offline)](https://fieldnotes.tahsinulmohsin.me)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-111111?logo=nextdotjs)](https://nextjs.org)
 [![Node](https://img.shields.io/badge/node-%E2%89%A520.9-3c873a?logo=nodedotjs&logoColor=white)](package.json)
 
 A study app for **NSU BIO103 (Biology I)**, built from the lecture files themselves. For each lecture you **read** every slide with a written explanation beside the original slide, **recall** its terms on flip cards, then **practise** with multiple-choice and short-answer questions answered in the slides' own words.
 
+**Live:** https://fieldnotes.tahsinulmohsin.me
+
 ![The Read view: an explanation on a ruled page beside the original slide](docs/screenshots/read-desktop.png)
 
 ## Production status
 
-| | |
-|---|---|
-| **Release** | [v2.0.0](CHANGELOG.md#200---2026-09-26), 2026-09-26 |
-| **Environment** | Homelab (CasaOS, Docker Compose), local network only |
-| **URL** | http://192.168.31.10:3103 |
-| **Health** | `GET /api/health` → `{"status":"ok","app":"bio103-fieldnotes","version":"2.0.0"}` |
-| **Last deploy** | 2026-09-25, every 2.0.0 feature. The version label in the footer and `/api/health` appears with the next `./deploy.sh` from the home network. |
-| **Rollback** | `deploy.sh` keeps the replaced image as `bio103-fieldnotes:previous` ([deployment/README.md](deployment/README.md)) |
-| **Public URL** | Not set up. `bio103.giggly.store.cv` is prepared in `deployment/` but not applied. |
+| Release | URL | Status | Health check |
+|---|---|---|---|
+| [v2.0.0](CHANGELOG.md#200---2026-09-26) (2026-09-26) | https://fieldnotes.tahsinulmohsin.me | ![Production](https://img.shields.io/website?url=https%3A%2F%2Ffieldnotes.tahsinulmohsin.me%2Fapi%2Fhealth&label=&up_message=online&down_message=offline) | [`GET /api/health`](https://fieldnotes.tahsinulmohsin.me/api/health) returns the status, app name and version |
 
 ## What's inside
 
@@ -126,7 +123,7 @@ lib/                  course index (server), progress, per-lecture loader, types
 scripts/              extract → build → validate, explanations, card review
 data/                 extracted text, built courses, OCR, cover records
 public/               slide images, lecture files and their PDF renderings, NSU logo
-deployment/           homelab and public-route configuration
+deployment/           reverse-proxy and tunnel configuration
 tools/ui-qa/          Playwright + axe screenshots, layout and accessibility checks
 docs/screenshots/     images used in this README
 .impeccable/          design context, direction, critique and review captures
@@ -134,12 +131,21 @@ docs/screenshots/     images used in this README
 
 ## Deployment
 
-`./deploy.sh` runs from a machine on the same network as the homelab:
-1. It copies the project to `~/bio103` on `192.168.31.10` over SSH.
-2. It tags the running image `bio103-fieldnotes:previous` and builds the new one there.
-3. It recreates the container and waits for `/api/health`.
+Production runs the Docker image: a standalone Next.js server (`Dockerfile`, `compose.yaml`; host port 3103 → container port 3000).
 
-The container runs as a non-root user with a read-only root filesystem, all capabilities dropped and `no-new-privileges`. [deployment/README.md](deployment/README.md) covers rollback, manual steps and the optional Cloudflare Tunnel + Nginx Proxy Manager route.
+```sh
+docker compose up -d --build
+curl http://localhost:3103/api/health
+```
+
+The container runs as a non-root user with a read-only root filesystem, all capabilities dropped and `no-new-privileges`, and has a health check.
+
+`./deploy.sh` ships the project to the production server over SSH:
+1. It tags the running image `bio103-fieldnotes:previous`, so it can be rolled back.
+2. It builds and starts the new image.
+3. It waits for `/api/health`.
+
+[deployment/README.md](deployment/README.md) has the manual steps and the reverse-proxy configuration.
 
 ## Quality checks
 
@@ -167,8 +173,10 @@ To release:
    gh release create vX.Y.Z --notes-from-tag
    ```
 
-4. Run `./deploy.sh` and check `/api/health` reports the new version.
+4. Run `./deploy.sh` and check that https://fieldnotes.tahsinulmohsin.me/api/health reports the new version.
 
-## Content and rights
+## License
 
-The lecture files, slide images and slide text belong to their authors, Prof. Dr. Md. Mahbubul Morshed and Prof. Dr. Md. Rakibul Islam (North South University). They are included for personal study and are **not** covered by any license in this repository. Keep the repository private unless you have permission to share them. The code has no license yet (all rights reserved by default); add a `LICENSE` file before sharing it.
+Released under the [MIT License](LICENSE), except for the lecture materials.
+
+The lecture materials are the lecture files, slide images and slide text. They live in `public/sources`, `public/slides`, `public/slides-mbmd` and `public/covers`, and the slide text is also in `data/`. They belong to their authors, Prof. Dr. Md. Mahbubul Morshed and Prof. Dr. Md. Rakibul Islam (North South University), are included for personal study only, and are **not** covered by the MIT License.
