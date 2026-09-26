@@ -2,7 +2,7 @@
 """Add only this app's DNS record and ingress rule using the server's certificate.
 
 Dry-run is the default. Credentials are read into memory and are never printed.
-Run this on the existing homelab host after verifying the Nginx origin.
+Run this on the server that runs cloudflared, after verifying the Nginx origin.
 """
 
 import argparse
@@ -20,9 +20,9 @@ import urllib.request
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--hostname", default="bio103.giggly.store.cv")
-    parser.add_argument("--tunnel-id", default="e7af9dd2-b40f-49a0-82b3-8e010cef37bd")
-    parser.add_argument("--origin", default="http://192.168.31.10:80")
+    parser.add_argument("--hostname", default="fieldnotes.tahsinulmohsin.me")
+    parser.add_argument("--tunnel-id", required=True, help="ID of the existing Cloudflare Tunnel")
+    parser.add_argument("--origin", required=True, help="where the tunnel forwards, e.g. http://<server>:80 (Nginx Proxy Manager)")
     parser.add_argument("--certificate", type=Path, default=Path.home() / ".cloudflared/cert.pem")
     parser.add_argument("--backup-dir", type=Path, default=Path(__file__).parent / "private")
     parser.add_argument("--apply", action="store_true")

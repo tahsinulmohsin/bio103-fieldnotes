@@ -27,7 +27,7 @@ Everything a student is tested on comes from their own lecturer's slides. Slide 
 - Students work lecture by lecture, in the lecturer's slide order, and return to the same lecture several times before an exam.
 - Exams mix multiple-choice questions with short answers: definitions, differences between two things (for example artery vs vein), and short explanations. Practice should cover both.
 - Progress is kept in the browser, separately per semester. There are no accounts and no sync between devices.
-- The app is self-hosted on the owner's homelab and may later be exposed to the internet.
+- The app is public at https://fieldnotes.tahsinulmohsin.me, behind Cloudflare.
 
 ## Capabilities and Constraints
 

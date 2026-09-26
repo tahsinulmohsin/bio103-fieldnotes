@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Install the isolated BIO103 host in the existing Nginx Proxy Manager.
 
-Run on the homelab host. Dry-run is the default. Existing NPM configuration is
+Run on the server that runs Nginx Proxy Manager. Dry-run is the default. Existing NPM configuration is
 backed up privately, validated, and restored if installation fails. Other proxy
 hosts are not edited. The existing NPM container is gracefully reloaded.
 """
@@ -16,6 +16,7 @@ import time
 import urllib.request
 
 NPM = "nginxproxymanager"
+HOSTNAME = "fieldnotes.tahsinulmohsin.me"  # must match server_name in nginx-bio103.conf
 NETWORK = "bio103-ingress"
 CASA_DIR = "/var/lib/casaos/apps/nginxproxymanager"
 HTTP_CONFIG = "/data/nginx/custom/http.conf"
@@ -90,7 +91,7 @@ def main():
         updated_http = updated_http.rstrip() + "\n" + INCLUDE + "\n"
     npm_state = json.loads(run(["docker", "inspect", NPM]))[0]
     already_connected = NETWORK in npm_state["NetworkSettings"]["Networks"]
-    print(json.dumps({"nginxHost": "bio103.giggly.store.cv", "network": NETWORK, "connectNetwork": not already_connected, "persistCasaOsNetwork": original_casa != updated_casa, "existingProxyHostsEdited": False, "apply": args.apply}, indent=2))
+    print(json.dumps({"nginxHost": HOSTNAME, "network": NETWORK, "connectNetwork": not already_connected, "persistCasaOsNetwork": original_casa != updated_casa, "existingProxyHostsEdited": False, "apply": args.apply}, indent=2))
     if not args.apply:
         return
     app_state = json.loads(run(["docker", "inspect", "bio103-fieldnotes"]))[0]
@@ -115,7 +116,7 @@ def main():
         write_npm(HTTP_CONFIG, updated_http)
         run(["docker", "exec", NPM, "nginx", "-t"])
         run(["docker", "exec", NPM, "nginx", "-s", "reload"])
-        request = urllib.request.Request("http://127.0.0.1/api/health", headers={"Host": "bio103.giggly.store.cv", "X-Forwarded-Proto": "https"})
+        request = urllib.request.Request("http://127.0.0.1/api/health", headers={"Host": HOSTNAME, "X-Forwarded-Proto": "https"})
         for attempt in range(20):
             try:
                 with urllib.request.urlopen(request, timeout=5) as response:

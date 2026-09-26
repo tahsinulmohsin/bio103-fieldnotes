@@ -7,6 +7,10 @@ All notable changes to BIO103 Fieldnotes. Versions follow [Semantic Versioning](
 ### Added
 - MIT license for the code and documentation. The lecture materials are excluded (see the README).
 
+### Changed
+- `deploy.sh` reads the server settings from an untracked `.deploy.env` (see `.deploy.env.example`) and prints the deployed version.
+- The deployment notes and reverse-proxy configuration target https://fieldnotes.tahsinulmohsin.me. The proxy scripts take the tunnel ID and origin as arguments.
+
 ## [2.0.0] - 2026-09-26
 
 A rebuild of the study flow, the content pipeline and the interface, live at https://fieldnotes.tahsinulmohsin.me.
@@ -47,7 +51,7 @@ The first version, built from 2026-09-22, with the Fall 2026 import added on 202
 - Fall 2025 (MRIs) course: 13 lectures and 439 slides, plus the course outline as a reference. 167 flashcards and 2,116 generated multiple-choice questions.
 - A first import of Fall 2026 (MBMD): 14 lectures, 411 slides, 298 flashcards and 3,414 questions, with a semester switch.
 - Explanation-first flow with practice unlocked after reading, original slide images, local OCR shown as a labelled supplement, progress in the browser with export.
-- Next.js 16, React 19, Tailwind CSS 4 and Motion. Standalone Docker image and homelab routing configuration.
+- Next.js 16, React 19, Tailwind CSS 4 and Motion. Standalone Docker image and reverse-proxy configuration.
 
 [Unreleased]: https://github.com/tahsinulmohsin/bio103-fieldnotes/compare/v2.0.0...HEAD
 [2.0.0]: https://github.com/tahsinulmohsin/bio103-fieldnotes/compare/v1.0.0...v2.0.0

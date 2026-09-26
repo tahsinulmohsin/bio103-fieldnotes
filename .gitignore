@@ -20,3 +20,6 @@ tools/ui-qa/out/
 
 # compiled OCR helper (build it from scripts/ocr_source.swift)
 scripts/ocr-source
+
+# local deployment settings (server address)
+.deploy.env
